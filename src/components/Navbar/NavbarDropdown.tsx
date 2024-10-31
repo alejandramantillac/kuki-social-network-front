@@ -6,7 +6,10 @@ interface NavbarDropdownProps {
   children: React.ReactNode
 }
 
-export const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ title, children }) => {
+export const NavbarDropdown: React.FC<NavbarDropdownProps> = ({
+  title,
+  children,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -20,7 +23,12 @@ export const NavbarDropdown: React.FC<NavbarDropdownProps> = ({ title, children 
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+          <div
+            className="py-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
             {children}
           </div>
         </div>

@@ -6,7 +6,11 @@ interface NavbarItemProps {
   active?: boolean
 }
 
-export const NavbarItem: React.FC<NavbarItemProps> = ({ href, children, active = false }) => {
+export const NavbarItem: React.FC<NavbarItemProps> = ({
+  href,
+  children,
+  active = false,
+}) => {
   return (
     <a
       href={href}

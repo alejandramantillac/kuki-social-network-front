@@ -26,7 +26,7 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'prettier': prettier,
+      prettier: prettier,
       '@typescript-eslint': tseslint,
     },
     rules: {
@@ -50,7 +50,7 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      'prettier': prettier,
+      prettier: prettier,
     },
     rules: {
       ...eslintConfigPrettier.rules,
@@ -59,7 +59,7 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      'prettier': prettier,
+      prettier: prettier,
     },
     rules: {
       'prettier/prettier': 'error',
