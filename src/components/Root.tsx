@@ -1,5 +1,3 @@
-/**
- * Para ir viendo el diseño de los componentes
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Button } from './Button'
@@ -26,7 +24,9 @@ export default function Root() {
       <Navbar>
         <NavbarBrand title="MyApp" />
         <NavbarMenu>
-          <NavbarItem href="/" active>Home</NavbarItem>
+          <NavbarItem href="/" active>
+            Home
+          </NavbarItem>
           <NavbarItem href="/about">About</NavbarItem>
           <NavbarDropdown title="More">
             <NavbarItem href="/settings">Settings</NavbarItem>
@@ -36,7 +36,9 @@ export default function Root() {
       </Navbar>
       <div className="p-4">
         <h1>Root</h1>
-        <Button variant="primary" size="md" onClick={() => setIsOpen(true)}>Open Modal</Button>
+        <Button variant="primary" size="md" onClick={() => setIsOpen(true)}>
+          Open Modal
+        </Button>
         <Input placeholder="Type something..." className="mt-4" />
         <Outlet />
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -45,7 +47,13 @@ export default function Root() {
             <p>This is the modal body content.</p>
           </ModalBody>
           <ModalFooter>
-            <Button variant="secondary" size="md" onClick={() => setIsOpen(false)}>Close</Button>
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={() => setIsOpen(false)}
+            >
+              Close
+            </Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -63,4 +71,3 @@ export default function Root() {
     </div>
   )
 }
- */
