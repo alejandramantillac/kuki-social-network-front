@@ -1,53 +1,29 @@
-import React, { useContext, useState } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import { ChefHat } from 'lucide-react'
+import LoginForm from '../components/Form/LoginForm'
 
-const Login: React.FC = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const authContext = useContext(AuthContext)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      if (authContext) {
-        const user = await authContext.login(username, password)
-        if (!user) {
-          setError('Invalid username or password')
-        }
-      }
-    } catch {
-      setError('An error occurred during login')
-    }
-  }
-
+export default function Login() {
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-yellow-50 flex items-center justify-center p-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <div className="flex justify-center mb-8">
+          <ChefHat className="h-12 w-12 text-orange-500" />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-8">
+          Bienvenido a Kuki
+        </h1>
+        <LoginForm />
+        <div className="mt-6 text-center">
+          <a href="#" className="text-sm text-orange-600 hover:underline">
+            ¿Olvidaste tu contraseña?
+          </a>
         </div>
-        {error && <p>{error}</p>}
-        <button type="submit">Login</button>
-      </form>
+        <div className="mt-4 text-center">
+          <span className="text-sm text-gray-600">¿No tienes una cuenta? </span>
+          <a href="#" className="text-sm text-orange-600 hover:underline">
+            Regístrate
+          </a>
+        </div>
+      </div>
     </div>
   )
 }
-
-export default Login

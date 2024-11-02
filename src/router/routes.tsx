@@ -3,15 +3,14 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom'
-import RequireAuth from '../components/RequireAuth'
 import Root from '../components/Root'
-import Login from '../pages/Login'
+import UserForm from '../pages/Login'
 
 const routes = createRoutesFromElements(
-  <Route path="/" element={<Root />}>
-    <Route path="login" element={<Login />} />
-    <Route element={<RequireAuth />}>
-      <Route path="/dashboard" element={<Root />} />
+  <Route path="/">
+    <Route path="/login" element={<UserForm />} />
+    <Route element={<Root />}>
+      <Route path="/dashboard" />
     </Route>
   </Route>
 )
