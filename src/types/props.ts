@@ -97,7 +97,7 @@ export type AlertProps = {
 
 export type BadgeProps = {
   text: string
-  color?: 'gray' | 'red' | 'green' | 'blue' | 'yellow'
+  color?: 'gray' | 'red' | 'green' | 'blue' | 'yellow' | 'primary' | 'secondary'
 }
 
 export type TooltipProps = {
@@ -124,4 +124,10 @@ export type FormProps = {
   validate?: (values: Record<string, unknown>) => Record<string, string>
   children: React.ReactNode
   submitText?: string
+}
+
+export type LinkedTextProps = {
+  href: string
+  text: string
+  colorClass?: string
 }

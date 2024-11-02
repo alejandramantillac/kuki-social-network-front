@@ -17,13 +17,13 @@ export const Card: React.FC<CardProps> = ({
   children,
 }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="bg-bg-primary shadow-md rounded-lg overflow-hidden">
       {imageUrl && (
         <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
       )}
       <div className="p-4">
         <h3 className="text-lg font-bold">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <p className="text-text-secondary">{description}</p>
         {children}
       </div>
     </div>

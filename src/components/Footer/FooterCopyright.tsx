@@ -11,8 +11,8 @@ export const FooterCopyright: React.FC<FooterCopyrightProps> = ({
   companyName,
 }) => {
   return (
-    <div className="mt-8 border-t border-gray-200 pt-8">
-      <p className="text-base text-gray-400 xl:text-center">
+    <div className="mt-8 border-t border-secondary pt-8">
+      <p className="text-base text-text-secondary xl:text-center">
         &copy; {new Date().getFullYear()} {companyName}. Todos los derechos
         reservados.
       </p>

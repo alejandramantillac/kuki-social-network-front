@@ -16,7 +16,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ size = 'md' }) => {
 
   return (
     <div
-      className={`border-4 border-gray-200 border-t-4 border-t-orange-600 rounded-full animate-spin justify-self-center ${sizeClasses[size]}`}
+      className={`border-4 border-bg-secondary border-t-4 border-t-primary-hover rounded-full animate-spin justify-self-center ${sizeClasses[size]}`}
     ></div>
   )
 }

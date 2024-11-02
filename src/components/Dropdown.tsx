@@ -15,12 +15,12 @@ export const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-orange-100 hover:text-orange-500"
+        className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-text-secondary hover:bg-secondary hover:text-primary"
       >
         {title}
       </button>
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+        <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-bg-primary ring-1 ring-black ring-opacity-5 z-10">
           <div
             className="py-1 flex flex-col"
             role="menu"

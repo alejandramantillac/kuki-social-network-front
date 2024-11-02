@@ -1,3 +1,32 @@
+:root {
+  --color-primary: #f97316; /* orange-500 */
+  --color-primary-hover: #ea580c; /* orange-600 */
+  --color-primary-dark: #6b7280; /* gray-500 */
+  --color-primary-dark-hover: #4b5563; /* gray-600 */
+  --color-secondary: #ffedd5; /* orange-100 */
+  --color-secondary-hover: #f9d8b3; /* orange-200 */
+  --color-tertiary: #f9fafb; /* gray-50 */
+  --color-tertiary-hover: #f4f5f7; /* gray-100 */
+  --color-text-primary: #ffffff; /* white */
+  --color-text-primary-hover: #f4f5f7; /* gray-100 */
+  --color-text-secondary: #6b7280; /* gray-500 */
+  --color-text-secondary-hover: #111827; /* gray-900 */
+  --color-text-tertiary: #4b5563; /* gray-600 */
+  --color-text-tertiary-hover: #1f2937; /* gray-800 */
+  --color-border-primary: #f97316; /* orange-500 */
+  --color-bg-primary: #ffffff; /* white */
+  --color-bg-secondary: #f9fafb; /* gray-50 */
+  --color-bg-tertiary: #f4f5f7; /* gray-100 */
+  --color-bg-success: #d1fae5; /* green-100 */
+  --color-text-success: #065f46; /* green-800 */
+  --color-bg-error: #fee2e2; /* red-100 */
+  --color-text-error: #b91c1c; /* red-800 */
+  --color-bg-warning: #fef3c7; /* yellow-100 */
+  --color-text-warning: #92400e; /* yellow-800 */
+  --color-bg-info: #bfdbfe; /* blue-100 */
+  --color-text-info: #1e3a8a; /* blue-800 */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

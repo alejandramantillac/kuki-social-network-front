@@ -21,11 +21,11 @@ export const Button: React.FC<ButtonProps> = ({
     'font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out'
   const variantStyles = {
     primary:
-      'bg-orange-500 hover:bg-orange-600 text-white focus:ring-orange-500',
+      'bg-primary hover:bg-primary-hover text-text-primary focus:ring-primary',
     secondary:
-      'bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-500',
+      'bg-secondary hover:bg-secondary-hover text-text-secondary focus:ring-secondary',
     outline:
-      'border border-orange-500 text-orange-500 hover:bg-orange-50 focus:ring-orange-500',
+      'border border-border-primary text-primary hover:bg-primary-hover focus:ring-primary',
   }
   const sizeStyles = {
     sm: 'px-3 py-1.5 text-sm',

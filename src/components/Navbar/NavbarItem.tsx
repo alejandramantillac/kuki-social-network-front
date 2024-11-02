@@ -11,8 +11,8 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
       href={href}
       className={`px-3 py-2 rounded-md text-sm font-medium ${
         active
-          ? 'bg-orange-500 text-white'
-          : 'text-gray-700 hover:bg-orange-100 hover:text-orange-500'
+          ? 'bg-bg-primary text-text-tertiary'
+          : 'text-text-tertiary hover:bg-secondary hover:text-primary'
       }`}
     >
       {children}

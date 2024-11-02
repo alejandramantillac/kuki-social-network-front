@@ -10,7 +10,7 @@ const routes = createRoutesFromElements(
   <Route path="/">
     <Route path="/login" element={<Login />} />
     <Route element={<Root />}>
-      <Route path="/dashboard" />
+      <Route path="/" />
     </Route>
   </Route>
 )

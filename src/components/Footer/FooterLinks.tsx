@@ -12,7 +12,7 @@ export const FooterLinks: React.FC<FooterLinksProps> = ({ title, links }) => {
   return (
     <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
       <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-secondary">
           {title}
         </h3>
         <ul className="mt-4 space-y-4">
@@ -20,7 +20,7 @@ export const FooterLinks: React.FC<FooterLinksProps> = ({ title, links }) => {
             <li key={link.name}>
               <a
                 href={link.href}
-                className="text-base text-gray-500 hover:text-gray-900"
+                className="text-base text-text-secondary hover:text-text-secondary-hover"
               >
                 {link.name}
               </a>

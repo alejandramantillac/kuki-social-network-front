@@ -38,7 +38,7 @@ export default function Root() {
   ]
 
   return (
-    <div>
+    <div className="bg-bg-secondary">
       <Navbar>
         <NavbarBrand title="MyApp" />
         <NavbarMenu>

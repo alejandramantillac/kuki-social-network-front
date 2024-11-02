@@ -21,25 +21,25 @@ export const Input: React.FC<InputProps> = ({
       {label && (
         <label
           htmlFor={props.id}
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-text-secondary-hover"
         >
           {label}
         </label>
       )}
       <div className="relative">
         {icon && (
-          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary">
             {icon}
           </div>
         )}
         <input
-          className={`w-full rounded-md border px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 ${
+          className={`w-full rounded-md border px-3 py-2 placeholder-text-secondary shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
             icon ? 'pl-10' : ''
-          } ${className} ${errors ? 'border-red-500' : 'border-gray-300'}`}
+          } ${className} ${errors ? 'border-text-error' : 'border-text-primary-hover'}`}
           {...props}
         />
       </div>
-      {errors && <p className="text-sm text-red-500">{errors}</p>}
+      {errors && <p className="text-sm text-text-error">{errors}</p>}
     </div>
   )
 }
