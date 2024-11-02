@@ -15,6 +15,9 @@ import { Footer } from './Footer/Footer'
 import { FooterCopyright } from './Footer/FooterCopyright'
 import { FooterLinks } from './Footer/FooterLinks'
 import { FooterSocial } from './Footer/FooterSocial'
+import { Avatar } from './Avatar'
+import { Card } from './Card'
+import { Dropdown } from './Dropdown'
 
 export default function Root() {
   const [isOpen, setIsOpen] = useState(false)
@@ -33,6 +36,11 @@ export default function Root() {
             <NavbarItem href="/profile">Profile</NavbarItem>
           </NavbarDropdown>
         </NavbarMenu>
+        <Avatar
+          src="https://example.com/avatar.jpg"
+          alt="User Avatar"
+          size="md"
+        />
       </Navbar>
       <div className="p-4">
         <h1>Root</h1>
@@ -40,6 +48,11 @@ export default function Root() {
           Open Modal
         </Button>
         <Input placeholder="Type something..." className="mt-4" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+          <Card title="Card 1" description="Description for card 1" />
+          <Card title="Card 2" description="Description for card 2" />
+          <Card title="Card 3" description="Description for card 3" />
+        </div>
         <Outlet />
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <ModalHeader title="Modal Title" onClose={() => setIsOpen(false)} />
@@ -56,6 +69,11 @@ export default function Root() {
             </Button>
           </ModalFooter>
         </Modal>
+        <Dropdown title="Options">
+          <NavbarItem href="/option1">Option 1</NavbarItem>
+          <NavbarItem href="/option2">Option 2</NavbarItem>
+          <NavbarItem href="/option3">Option 3</NavbarItem>
+        </Dropdown>
       </div>
       <Footer>
         <FooterLinks
