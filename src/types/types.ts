@@ -82,3 +82,37 @@ export type NavbarItemProps = {
 export type NavbarMenuProps = {
   children: React.ReactNode
 }
+
+export type RequireAuthProps = {
+  redirectPath?: string
+  unAuthorizedPath?: string
+  roles?: string[]
+}
+
+export type AlertProps = {
+  message: string
+  type?: 'success' | 'error' | 'warning' | 'info'
+}
+
+export type BadgeProps = {
+  text: string
+  color?: 'gray' | 'red' | 'green' | 'blue' | 'yellow'
+}
+
+export type TooltipProps = {
+  text: string
+  children: React.ReactNode
+}
+
+export type SpinnerProps = {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export type TabProps = {
+  label: string
+  content: React.ReactNode
+}
+
+export type TabsProps = {
+  tabs: TabProps[]
+}
