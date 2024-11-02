@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import { DropdownProps } from '../types/types'
 
+/**
+ * Dropdown component to display a dropdown menu with a title and children.
+ * @param {DropdownProps} props - The properties for the Dropdown component.
+ * @param {string} props.title - The title of the dropdown button.
+ * @param {React.ReactNode} props.children - The content to display inside the dropdown menu.
+ * @returns {JSX.Element} The rendered Dropdown component.
+ */
 export const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false)
 

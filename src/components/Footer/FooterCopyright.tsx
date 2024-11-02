@@ -1,6 +1,12 @@
 import React from 'react'
 import { FooterCopyrightProps } from '../../types/types'
 
+/**
+ * FooterCopyright component to display copyright information in the footer.
+ * @param {FooterCopyrightProps} props - The properties for the FooterCopyright component.
+ * @param {string} props.companyName - The name of the company to display in the copyright text.
+ * @returns {JSX.Element} The rendered FooterCopyright component.
+ */
 export const FooterCopyright: React.FC<FooterCopyrightProps> = ({
   companyName,
 }) => {

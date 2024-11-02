@@ -1,6 +1,14 @@
 import React from 'react'
 import { InputProps } from '../types/types'
 
+/**
+ * Input component to display an input field with optional label and icon.
+ * @param {InputProps} props - The properties for the Input component.
+ * @param {string} [props.label] - The label to display above the input field.
+ * @param {React.ReactNode} [props.icon] - The icon to display inside the input field.
+ * @param {string} [props.className] - Additional classes to apply to the input field.
+ * @returns {JSX.Element} The rendered Input component.
+ */
 export const Input: React.FC<InputProps> = ({
   label,
   icon,

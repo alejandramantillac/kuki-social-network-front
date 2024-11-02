@@ -1,6 +1,14 @@
 import React from 'react'
 import { ModalProps } from '../../types/types'
 
+/**
+ * Modal component to display a modal dialog.
+ * @param {ModalProps} props - The properties for the Modal component.
+ * @param {boolean} props.isOpen - Indicates whether the modal is open.
+ * @param {() => void} props.onClose - Function to call when the modal is closed.
+ * @param {React.ReactNode} props.children - The content to display inside the modal.
+ * @returns {JSX.Element | null} The rendered Modal component, or null if the modal is not open.
+ */
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null
 

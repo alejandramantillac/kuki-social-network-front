@@ -1,6 +1,15 @@
 import React from 'react'
 import { ButtonProps } from '../types/types'
 
+/**
+ * Button component to display a button with different variants and sizes.
+ * @param {ButtonProps} props - The properties for the Button component.
+ * @param {React.ReactNode} props.children - The content to display inside the button.
+ * @param {'primary' | 'secondary' | 'outline'} [props.variant='primary'] - The variant of the button. Defaults to 'primary'.
+ * @param {'sm' | 'md' | 'lg'} [props.size='md'] - The size of the button. Defaults to 'md'.
+ * @param {string} [props.className] - Additional classes to apply to the button.
+ * @returns {JSX.Element} The rendered Button component.
+ */
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',

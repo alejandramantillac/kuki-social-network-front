@@ -2,6 +2,13 @@ import React from 'react'
 import { X } from 'lucide-react'
 import { ModalHeaderProps } from '../../types/types'
 
+/**
+ * ModalHeader component to display the header of a modal.
+ * @param {ModalHeaderProps} props - The properties for the ModalHeader component.
+ * @param {string} props.title - The title to display in the modal header.
+ * @param {() => void} props.onClose - Function to call when the close button is clicked.
+ * @returns {JSX.Element} The rendered ModalHeader component.
+ */
 export const ModalHeader: React.FC<ModalHeaderProps> = ({ title, onClose }) => {
   return (
     <div className="bg-gray-50 px-4 py-3 sm:px-6">

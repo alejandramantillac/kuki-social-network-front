@@ -1,6 +1,10 @@
 import React from 'react'
 import { Facebook, Twitter, Instagram } from 'lucide-react'
 
+/**
+ * FooterSocial component to display social media links in the footer.
+ * @returns {JSX.Element} The rendered FooterSocial component.
+ */
 export const FooterSocial: React.FC = () => {
   return (
     <div className="mt-8 xl:mt-0">
