@@ -18,9 +18,24 @@ import { FooterSocial } from './Footer/FooterSocial'
 import { Avatar } from './Avatar'
 import { Card } from './Card'
 import { Dropdown } from './Dropdown'
+import { Alert } from './Alert'
+import { Badge } from './Badge'
+import { Tooltip } from './Tooltip'
+import { Spinner } from './Spinner'
+import { Tabs } from './Tabs'
 
 export default function Root() {
   const [isOpen, setIsOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  // Simulate loading
+  setTimeout(() => setLoading(false), 2000)
+
+  const tabs = [
+    { label: 'Tab 1', content: <div>Content for Tab 1</div> },
+    { label: 'Tab 2', content: <div>Content for Tab 2</div> },
+    { label: 'Tab 3', content: <div>Content for Tab 3</div> },
+  ]
 
   return (
     <div>
@@ -44,15 +59,26 @@ export default function Root() {
       </Navbar>
       <div className="p-4">
         <h1>Root</h1>
-        <Button variant="primary" size="md" onClick={() => setIsOpen(true)}>
-          Open Modal
-        </Button>
+        <Alert message="This is an info alert" type="info" />
+        <Badge text="New" color="gray" />
+        <Tooltip text="Click to open the modal">
+          <Button variant="primary" size="md" onClick={() => setIsOpen(true)}>
+            Open Modal
+          </Button>
+        </Tooltip>
         <Input placeholder="Type something..." className="mt-4" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-          <Card title="Card 1" description="Description for card 1" />
-          <Card title="Card 2" description="Description for card 2" />
-          <Card title="Card 3" description="Description for card 3" />
-        </div>
+        <Tabs tabs={tabs} />
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <Spinner size="md" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            <Card title="Card 1" description="Description for card 1" />
+            <Card title="Card 2" description="Description for card 2" />
+            <Card title="Card 3" description="Description for card 3" />
+          </div>
+        )}
         <Outlet />
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <ModalHeader title="Modal Title" onClose={() => setIsOpen(false)} />
