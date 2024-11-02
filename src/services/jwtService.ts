@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode'
 
-interface DecodedToken {
+type DecodedToken = {
   username: string
   roles: string[]
   exp: number

@@ -1,8 +1,8 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
+import React, { createContext, ReactNode } from 'react'
 import authService from '../services/authService'
-import { User } from '../types'
+import { User } from '../types/model'
 
-interface AuthContextProps {
+type AuthContextProps = {
   hasRoles(roles: string[]): boolean
   isAuthenticated: boolean
   currentUser: User | null
@@ -12,39 +12,28 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined)
 
-interface AuthProviderProps {
+type AuthProviderProps = {
   children: ReactNode
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(
-    authService.getUser()
-  )
-
-  useEffect(() => {
-    const user = authService.getUser()
-    if (user) {
-      setCurrentUser(user)
-    }
-  }, [])
-
   const login = async (username: string, password: string) => {
     const user = await authService.login(username, password)
-    setCurrentUser(user)
     return user
   }
 
   const logout = () => {
     authService.logout()
-    setCurrentUser(null)
   }
 
-  const isAuthenticated = !!currentUser
+  const isAuthenticated = !!authService.getUser()
 
   const hasRoles = (roles: string[]) => {
-    if (!currentUser) return false
-    return roles.some((role) => currentUser.roles.includes(role))
+    if (!authService.getUser()) return false
+    return roles.some((role) => authService.getUser()?.roles.includes(role))
   }
+
+  const currentUser = authService.getUser()
 
   return (
     <AuthContext.Provider

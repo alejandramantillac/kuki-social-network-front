@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonProps } from '../types/types'
+import { ButtonProps } from '../types/props'
 
 /**
  * Button component to display a button with different variants and sizes.

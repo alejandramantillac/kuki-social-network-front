@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DropdownProps } from '../types/types'
+import { DropdownProps } from '../types/props'
 
 /**
  * Dropdown component to display a dropdown menu with a title and children.

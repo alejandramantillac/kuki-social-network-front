@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TabsProps } from '../types/types'
+import { TabsProps } from '../types/props'
 
 /**
  * Tabs component to display a set of tabs with their respective content.

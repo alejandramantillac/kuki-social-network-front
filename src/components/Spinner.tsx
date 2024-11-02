@@ -1,5 +1,5 @@
 import React from 'react'
-import { SpinnerProps } from '../types/types'
+import { SpinnerProps } from '../types/props'
 
 /**
  * Spinner component to display a loading spinner with different sizes.

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavbarProps } from '../../types/types'
+import { NavbarProps } from '../../types/props'
 
 export const Navbar: React.FC<NavbarProps> = ({ children }) => {
   return (

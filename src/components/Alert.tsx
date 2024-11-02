@@ -1,5 +1,5 @@
 import React from 'react'
-import { AlertProps } from '../types/types'
+import { AlertProps } from '../types/props'
 
 /**
  * Alert component to display different types of alert messages.

@@ -26,6 +26,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string
   icon?: React.ReactNode
+  errors?: string
 }
 
 export type ModalProps = {
@@ -115,4 +116,12 @@ export type TabProps = {
 
 export type TabsProps = {
   tabs: TabProps[]
+}
+
+export type FormProps = {
+  onSubmit: (data: Record<string, unknown>) => Promise<void>
+  initialValues: Record<string, unknown>
+  validate?: (values: Record<string, unknown>) => Record<string, string>
+  children: React.ReactNode
+  submitText?: string
 }

@@ -1,10 +1,10 @@
 import axiosInstance from '../config/axiosConfig'
-import { User } from '../types'
+import { User } from '../types/model'
 import jwtService from './jwtService'
 
 const API_PATH = 'v1/auth'
 
-interface LoginResponse {
+type LoginResponse = {
   token: string
 }
 

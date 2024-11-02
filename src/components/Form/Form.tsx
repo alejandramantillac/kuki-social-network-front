@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from '../Button'
 import { Spinner } from '../Spinner'
-import { FormProps } from '../../types/types'
+import { FormProps } from '../../types/props'
 
 /**
  * Form component to handle form state and validation.

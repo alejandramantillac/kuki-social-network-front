@@ -1,5 +1,5 @@
 import React from 'react'
-import { ModalProps } from '../../types/types'
+import { ModalProps } from '../../types/props'
 
 /**
  * Modal component to display a modal dialog.

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavbarItemProps } from '../../types/types'
+import { NavbarItemProps } from '../../types/props'
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({
   href,

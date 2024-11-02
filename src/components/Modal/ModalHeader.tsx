@@ -1,6 +1,6 @@
 import React from 'react'
 import { X } from 'lucide-react'
-import { ModalHeaderProps } from '../../types/types'
+import { ModalHeaderProps } from '../../types/props'
 
 /**
  * ModalHeader component to display the header of a modal.

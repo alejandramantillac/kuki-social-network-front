@@ -1,5 +1,5 @@
 import React from 'react'
-import { FooterLinksProps } from '../../types/types'
+import { FooterLinksProps } from '../../types/props'
 
 /**
  * FooterLinks component to display a list of links in the footer.

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ModalBodyProps } from '../../types/types'
+import { ModalBodyProps } from '../../types/props'
 
 /**
  * ModalBody component to display the body content of a modal.

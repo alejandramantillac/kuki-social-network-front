@@ -1,5 +1,5 @@
 import React from 'react'
-import { FooterProps } from '../../types/types'
+import { FooterProps } from '../../types/props'
 
 /**
  * Footer component to display a footer section with children elements.

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BadgeProps } from '../types/types'
+import { BadgeProps } from '../types/props'
 
 /**
  * Badge component to display a label with different background colors.

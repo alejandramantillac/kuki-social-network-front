@@ -1,5 +1,5 @@
 import React from 'react'
-import { ModalFooterProps } from '../../types/types'
+import { ModalFooterProps } from '../../types/props'
 
 /**
  * ModalFooter component to display the footer content of a modal.

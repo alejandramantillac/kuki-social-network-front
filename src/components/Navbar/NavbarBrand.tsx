@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChefHat } from 'lucide-react'
-import { NavbarBrandProps } from '../../types/types'
+import { NavbarBrandProps } from '../../types/props'
 
 export const NavbarBrand: React.FC<NavbarBrandProps> = ({ title }) => {
   return (

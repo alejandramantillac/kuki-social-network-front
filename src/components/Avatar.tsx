@@ -1,5 +1,5 @@
 import React from 'react'
-import { AvatarProps } from '../types/types'
+import { AvatarProps } from '../types/props'
 
 /**
  * Avatar component to display a user's avatar image with different sizes.

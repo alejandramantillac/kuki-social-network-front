@@ -1,5 +1,5 @@
 import React from 'react'
-import { FooterCopyrightProps } from '../../types/types'
+import { FooterCopyrightProps } from '../../types/props'
 
 /**
  * FooterCopyright component to display copyright information in the footer.

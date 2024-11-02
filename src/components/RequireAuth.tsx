@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import { RequireAuthProps } from '../types/types'
+import { RequireAuthProps } from '../types/props'
 
 /**
  * RequireAuth component to protect routes that require authentication and specific roles.

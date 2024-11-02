@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputProps } from '../types/types'
+import { InputProps } from '../types/props'
 
 /**
  * Input component to display an input field with optional label and icon.

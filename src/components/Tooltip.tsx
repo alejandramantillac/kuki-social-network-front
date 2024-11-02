@@ -1,5 +1,5 @@
 import React from 'react'
-import { TooltipProps } from '../types/types'
+import { TooltipProps } from '../types/props'
 
 /**
  * Tooltip component to display additional information when hovering over an element.

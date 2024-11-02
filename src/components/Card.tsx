@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardProps } from '../types/types'
+import { CardProps } from '../types/props'
 
 /**
  * Card component to display a card with a title, description, image, and optional children.
