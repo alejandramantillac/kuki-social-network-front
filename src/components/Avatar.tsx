@@ -1,5 +1,5 @@
 import React from 'react'
-import { AvatarProps } from '../types'
+import { AvatarProps } from '../types/types'
 
 export const Avatar: React.FC<AvatarProps> = ({ src, alt, size = 'md' }) => {
   const sizeClasses = {

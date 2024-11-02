@@ -1,10 +1,6 @@
 import React from 'react'
 import { X } from 'lucide-react'
-
-interface ModalHeaderProps {
-  title: string
-  onClose: () => void
-}
+import { ModalHeaderProps } from '../../types/types'
 
 export const ModalHeader: React.FC<ModalHeaderProps> = ({ title, onClose }) => {
   return (

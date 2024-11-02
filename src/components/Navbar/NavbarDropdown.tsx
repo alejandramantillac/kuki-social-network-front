@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-
-interface NavbarDropdownProps {
-  title: string
-  children: React.ReactNode
-}
+import { NavbarDropdownProps } from '../../types/types'
 
 export const NavbarDropdown: React.FC<NavbarDropdownProps> = ({
   title,

@@ -1,10 +1,5 @@
 import React from 'react'
-
-interface NavbarItemProps {
-  href: string
-  children: React.ReactNode
-  active?: boolean
-}
+import { NavbarItemProps } from '../../types/types'
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({
   href,

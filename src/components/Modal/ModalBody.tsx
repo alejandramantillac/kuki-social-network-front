@@ -1,8 +1,5 @@
 import React from 'react'
-
-interface ModalBodyProps {
-  children: React.ReactNode
-}
+import { ModalBodyProps } from '../../types/types'
 
 export const ModalBody: React.FC<ModalBodyProps> = ({ children }) => {
   return (

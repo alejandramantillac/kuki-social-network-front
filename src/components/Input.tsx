@@ -1,9 +1,5 @@
-import React, { InputHTMLAttributes } from 'react'
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  icon?: React.ReactNode
-}
+import React from 'react'
+import { InputProps } from '../types/types'
 
 export const Input: React.FC<InputProps> = ({
   label,

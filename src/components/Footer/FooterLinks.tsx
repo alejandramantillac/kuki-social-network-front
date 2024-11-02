@@ -1,9 +1,5 @@
 import React from 'react'
-
-interface FooterLinksProps {
-  title: string
-  links: { name: string; href: string }[]
-}
+import { FooterLinksProps } from '../../types/types'
 
 export const FooterLinks: React.FC<FooterLinksProps> = ({ title, links }) => {
   return (

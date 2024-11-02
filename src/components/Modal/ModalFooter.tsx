@@ -1,8 +1,5 @@
 import React from 'react'
-
-interface ModalFooterProps {
-  children: React.ReactNode
-}
+import { ModalFooterProps } from '../../types/types'
 
 export const ModalFooter: React.FC<ModalFooterProps> = ({ children }) => {
   return (

@@ -1,8 +1,5 @@
 import React from 'react'
-
-interface FooterCopyrightProps {
-  companyName: string
-}
+import { FooterCopyrightProps } from '../../types/types'
 
 export const FooterCopyright: React.FC<FooterCopyrightProps> = ({
   companyName,

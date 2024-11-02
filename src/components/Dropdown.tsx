@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { DropdownProps } from '../types'
+import { DropdownProps } from '../types/types'
 
 export const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false)
