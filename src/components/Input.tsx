@@ -13,10 +13,11 @@ export const Input: React.FC<InputProps> = ({
   label,
   icon,
   className,
+  errors,
   ...props
 }) => {
   return (
-    <div className="space-y-2">
+    <div className="mt-2">
       {label && (
         <label
           htmlFor={props.id}
@@ -32,12 +33,13 @@ export const Input: React.FC<InputProps> = ({
           </div>
         )}
         <input
-          className={`w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 ${
+          className={`w-full rounded-md border px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 ${
             icon ? 'pl-10' : ''
-          } ${className}`}
+          } ${className} ${errors ? 'border-red-500' : 'border-gray-300'}`}
           {...props}
         />
       </div>
+      {errors && <p className="text-sm text-red-500">{errors}</p>}
     </div>
   )
 }
