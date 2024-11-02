@@ -4,11 +4,11 @@ import {
   Route,
 } from 'react-router-dom'
 import Root from '../components/Root'
-import UserForm from '../pages/Login'
+import Login from '../pages/Login'
 
 const routes = createRoutesFromElements(
   <Route path="/">
-    <Route path="/login" element={<UserForm />} />
+    <Route path="/login" element={<Login />} />
     <Route element={<Root />}>
       <Route path="/dashboard" />
     </Route>
