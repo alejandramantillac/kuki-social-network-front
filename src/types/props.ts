@@ -13,9 +13,20 @@ export type CardProps = {
   children?: React.ReactNode
 }
 
+export type Option = {
+  value: string
+  label: string
+}
+
 export type DropdownProps = {
   title: string
-  children: React.ReactNode
+  options: Option[]
+  showSearch?: boolean
+  className?: string
+  name: string
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  errors?: string
 }
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {

@@ -95,11 +95,18 @@ export default function Root() {
             </Button>
           </ModalFooter>
         </Modal>
-        <Dropdown title="Options">
-          <NavbarItem href="/option1">Option 1</NavbarItem>
-          <NavbarItem href="/option2">Option 2</NavbarItem>
-          <NavbarItem href="/option3">Option 3</NavbarItem>
-        </Dropdown>
+        <Dropdown
+          title="Select an option"
+          options={[
+            { label: 'Option 1', value: 'option1' },
+            { label: 'Option 2', value: 'option2' },
+            { label: 'Option 3', value: 'option3' },
+          ]}
+          value="option1"
+          showSearch
+          name="dropdown"
+          onChange={(e) => console.log(e.target.value)}
+        />
       </div>
       <Footer>
         <FooterLinks
