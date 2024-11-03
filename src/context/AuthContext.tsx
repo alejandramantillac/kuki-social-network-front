@@ -6,8 +6,6 @@ type AuthContextProps = {
   hasRoles(roles: string[]): boolean
   isAuthenticated: boolean
   currentUser: User | null
-  login: (username: string, password: string) => Promise<User | null>
-  logout: () => void
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined)
@@ -17,15 +15,6 @@ type AuthProviderProps = {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const login = async (username: string, password: string) => {
-    const user = await authService.login(username, password)
-    return user
-  }
-
-  const logout = () => {
-    authService.logout()
-  }
-
   const isAuthenticated = !!authService.getUser()
 
   const hasRoles = (roles: string[]) => {
@@ -37,7 +26,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, login, logout, isAuthenticated, hasRoles }}
+      value={{
+        currentUser,
+        isAuthenticated,
+        hasRoles,
+      }}
     >
       {children}
     </AuthContext.Provider>

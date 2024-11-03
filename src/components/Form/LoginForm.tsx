@@ -1,8 +1,8 @@
-import React, { useContext, JSX } from 'react'
+import React, { JSX } from 'react'
 import Form from './Form'
 import { Input } from '../Input'
-import { AuthContext } from '../../context/AuthContext'
-import { Navigate } from 'react-router-dom'
+import auth from '../../services/authService'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * LoginForm component to display a login form.
@@ -11,7 +11,8 @@ import { Navigate } from 'react-router-dom'
  * <LoginForm />
  */
 const LoginForm: React.FC = (): JSX.Element => {
-  const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const initialValues = {
     username: null,
     password: null,
@@ -30,16 +31,14 @@ const LoginForm: React.FC = (): JSX.Element => {
 
   const handleSubmit = async (data: Record<string, unknown>) => {
     try {
-      if (authContext) {
-        const user = await authContext.login(
-          data.username as string,
-          data.password as string
-        )
-        if (user) {
-          ;<Navigate to="/dashboard" replace />
-        } else {
-          console.log('Invalid username or password')
-        }
+      const user = await auth.login(
+        data.username as string,
+        data.password as string
+      )
+      if (user) {
+        navigate('/')
+      } else {
+        console.log('Invalid username or password')
       }
     } catch (error) {
       console.error('An error occurred while submitting the form: ' + error)

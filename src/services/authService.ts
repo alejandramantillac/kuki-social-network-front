@@ -8,6 +8,23 @@ type LoginResponse = {
   token: string
 }
 
+const register = async (data: {
+  username: string
+  email: string
+  password: string
+  fullName: string
+  country: string
+}): Promise<User | null> => {
+  const response = await axiosInstance.post<LoginResponse>(
+    API_PATH + '/register',
+    data
+  )
+  if (response.data.token) {
+    jwtService.setToken(response.data.token)
+  }
+  return getUser()
+}
+
 const login = async (
   username: string,
   password: string
@@ -39,6 +56,7 @@ const getUser = (): User | null => {
 }
 
 export default {
+  register,
   login,
   logout,
   getUser,

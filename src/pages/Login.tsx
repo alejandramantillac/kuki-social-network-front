@@ -25,7 +25,7 @@ export default function Login(): JSX.Element {
         </div>
         <div className="mt-4 text-center">
           <span className="text-sm text-gray-600">¿No tienes una cuenta? </span>
-          <LinkedText href="#" text="Regístrate" />
+          <LinkedText href="/register" text="Regístrate" />
         </div>
       </div>
     </div>
