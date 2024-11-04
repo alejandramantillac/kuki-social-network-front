@@ -30,7 +30,7 @@ export type DropdownProps = {
 }
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'secondary' | 'outline' | 'none'
   size?: 'sm' | 'md' | 'lg'
 }
 

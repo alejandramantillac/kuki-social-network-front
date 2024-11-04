@@ -23,6 +23,7 @@ import { SearchBar } from './SearchBar'
 export default function Root() {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [searchValue, setSearchValue] = useState('')
 
   // Simulate loading
   setTimeout(() => setLoading(false), 2000)
@@ -38,7 +39,11 @@ export default function Root() {
       <Navbar />
       <div className="p-4 ml-20">
         <h1>Root</h1>
-        <SearchBar></SearchBar>
+        <SearchBar
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search..."
+        />
         <Alert message="This is an info alert" type="info" />
         <Badge text="New" color="gray" />
         <Tooltip text="Click to open the modal">
