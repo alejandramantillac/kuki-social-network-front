@@ -142,3 +142,10 @@ export type LinkedTextProps = {
   text: string
   colorClass?: string
 }
+
+export type SearchBarProps = {
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string
+  className?: string
+}

@@ -7,15 +7,10 @@ import { ModalBody } from './Modal/ModalBody'
 import { ModalFooter } from './Modal/ModalFooter'
 import { ModalHeader } from './Modal/ModalHeader'
 import { Navbar } from './Navbar/Navbar'
-import { NavbarBrand } from './Navbar/NavbarBrand'
-import { NavbarDropdown } from './Navbar/NavbarDropdown'
-import { NavbarItem } from './Navbar/NavbarItem'
-import { NavbarMenu } from './Navbar/NavbarMenu'
 import { Footer } from './Footer/Footer'
 import { FooterCopyright } from './Footer/FooterCopyright'
 import { FooterLinks } from './Footer/FooterLinks'
 import { FooterSocial } from './Footer/FooterSocial'
-import { Avatar } from './Avatar'
 import { Card } from './Card'
 import { Dropdown } from './Dropdown'
 import { Alert } from './Alert'
@@ -23,6 +18,7 @@ import { Badge } from './Badge'
 import { Tooltip } from './Tooltip'
 import { Spinner } from './Spinner'
 import { Tabs } from './Tabs'
+import { SearchBar } from './SearchBar'
 
 export default function Root() {
   const [isOpen, setIsOpen] = useState(false)
@@ -39,26 +35,10 @@ export default function Root() {
 
   return (
     <div className="bg-bg-secondary">
-      <Navbar>
-        <NavbarBrand title="MyApp" />
-        <NavbarMenu>
-          <NavbarItem href="/" active>
-            Home
-          </NavbarItem>
-          <NavbarItem href="/about">About</NavbarItem>
-          <NavbarDropdown title="More">
-            <NavbarItem href="/settings">Settings</NavbarItem>
-            <NavbarItem href="/profile">Profile</NavbarItem>
-          </NavbarDropdown>
-        </NavbarMenu>
-        <Avatar
-          src="https://example.com/avatar.jpg"
-          alt="User Avatar"
-          size="md"
-        />
-      </Navbar>
-      <div className="p-4">
+      <Navbar />
+      <div className="p-4 ml-20">
         <h1>Root</h1>
+        <SearchBar></SearchBar>
         <Alert message="This is an info alert" type="info" />
         <Badge text="New" color="gray" />
         <Tooltip text="Click to open the modal">

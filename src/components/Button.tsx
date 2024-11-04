@@ -26,6 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
       'bg-secondary hover:bg-secondary-hover text-text-secondary focus:ring-secondary',
     outline:
       'border border-border-primary text-primary hover:bg-primary-hover focus:ring-primary',
+    none: 'text-primary hover:text-primary-hover focus:ring-primary',
   }
   const sizeStyles = {
     sm: 'px-3 py-1.5 text-sm',

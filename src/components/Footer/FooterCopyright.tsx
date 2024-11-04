@@ -13,8 +13,7 @@ export const FooterCopyright: React.FC<FooterCopyrightProps> = ({
   return (
     <div className="mt-8 border-t border-secondary pt-8">
       <p className="text-base text-text-secondary xl:text-center">
-        &copy; {new Date().getFullYear()} {companyName}. Todos los derechos
-        reservados.
+        &copy; {new Date().getFullYear()} {companyName}. All rights reserved.
       </p>
     </div>
   )
