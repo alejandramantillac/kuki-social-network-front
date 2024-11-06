@@ -27,8 +27,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       if (value) {
         try {
           console.log('Fetching recipes for:', value)
-          const response = await recipeService.searchRecipes(value)
-          const results = response.content // Accede a la propiedad content
+          const results = await recipeService.searchRecipes(value)
           console.log('Fetched recipes:', results)
           setSearchResults(results)
           setError(null) // Clear any previous errors
@@ -46,15 +45,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <input
-        type="text"
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full rounded-md border border-border-primary px-3 py-2 pl-10 placeholder-text-secondary shadow-sm focus:border-color-primary focus:outline-none focus:ring-1 focus:ring-color-primary"
-      />
-      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary">
-        <Search className="h-5 w-5" />
+      <div className="relative w-full rounded-md border border-border-primary shadow-sm focus-within:border-color-primary focus-within:ring-1 focus-within:ring-color-primary">
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className="w-full rounded-md border-none px-3 py-2 pl-10 placeholder-text-secondary focus:outline-none"
+        />
+        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary">
+          <Search className="h-5 w-5" />
+        </div>
       </div>
       {error && <div className="text-red-500 mt-2">{error}</div>}
       {searchResults.length > 0 && (
