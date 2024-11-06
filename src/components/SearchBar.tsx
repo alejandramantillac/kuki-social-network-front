@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Search } from 'lucide-react'
 import { SearchBarProps } from '../types/props'
+import recipeService from '../services/recipeService'
+import { Recipe } from '../types/model'
 
 /**
  * SearchBar component to display a search input with an icon.
@@ -17,6 +19,31 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = 'Search...',
   className,
 }) => {
+  const [searchResults, setSearchResults] = useState<Recipe[]>([])
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      if (value) {
+        try {
+          console.log('Fetching recipes for:', value)
+          const response = await recipeService.searchRecipes(value)
+          const results = response.content // Accede a la propiedad content
+          console.log('Fetched recipes:', results)
+          setSearchResults(results)
+          setError(null) // Clear any previous errors
+        } catch (err) {
+          console.error('Error fetching recipes:', err)
+          setError('Failed to fetch recipes. Please try again later.')
+        }
+      } else {
+        setSearchResults([])
+      }
+    }
+
+    fetchRecipes()
+  }, [value])
+
   return (
     <div className={`relative ${className}`}>
       <input
@@ -29,6 +56,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary">
         <Search className="h-5 w-5" />
       </div>
+      {error && <div className="text-red-500 mt-2">{error}</div>}
+      {searchResults.length > 0 && (
+        <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+          {searchResults.map((recipe) => (
+            <div key={recipe.id} className="p-2 hover:bg-gray-100">
+              {recipe.title}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
