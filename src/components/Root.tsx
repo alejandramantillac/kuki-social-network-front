@@ -6,7 +6,6 @@ import { Modal } from './Modal/Modal'
 import { ModalBody } from './Modal/ModalBody'
 import { ModalFooter } from './Modal/ModalFooter'
 import { ModalHeader } from './Modal/ModalHeader'
-import { Navbar } from './Navbar/Navbar'
 import { Footer } from './Footer/Footer'
 import { FooterCopyright } from './Footer/FooterCopyright'
 import { FooterLinks } from './Footer/FooterLinks'
@@ -36,7 +35,6 @@ export default function Root() {
 
   return (
     <div className="bg-bg-secondary">
-      <Navbar />
       <div className="p-4 ml-20">
         <h1>Root</h1>
         <SearchBar
