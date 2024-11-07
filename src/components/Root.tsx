@@ -6,7 +6,6 @@ import { Modal } from './Modal/Modal'
 import { ModalBody } from './Modal/ModalBody'
 import { ModalFooter } from './Modal/ModalFooter'
 import { ModalHeader } from './Modal/ModalHeader'
-import { Navbar } from './Navbar/Navbar'
 import { Footer } from './Footer/Footer'
 import { FooterCopyright } from './Footer/FooterCopyright'
 import { FooterLinks } from './Footer/FooterLinks'
@@ -20,6 +19,7 @@ import { Spinner } from './Spinner'
 import { Tabs } from './Tabs'
 import { SearchBar } from './SearchBar'
 import { MainLayout } from './Layout/MainLayout'
+import { Navbar } from './Navbar/Navbar'
 
 export default function Root() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)

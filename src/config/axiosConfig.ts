@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = jwtService.getToken()
+    const token = jwtService.getValidToken()
     if (token && config.headers) {
       config.headers['Authorization'] = `Bearer ${token}`
     }

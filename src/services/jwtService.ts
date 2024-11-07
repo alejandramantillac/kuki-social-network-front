@@ -8,6 +8,13 @@ type DecodedToken = {
 
 const TOKEN_KEY = 'jwtToken'
 
+const getValidToken = (): string | null => {
+  if (isTokenExpired()) {
+    removeToken()
+  }
+  return getToken()
+}
+
 const getToken = (): string | null => {
   return localStorage.getItem(TOKEN_KEY)
 }
@@ -47,7 +54,7 @@ const isTokenExpired = (): boolean => {
 }
 
 export default {
-  getToken,
+  getValidToken,
   setToken,
   removeToken,
   getDecodedToken,

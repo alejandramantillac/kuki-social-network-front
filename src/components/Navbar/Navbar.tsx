@@ -1,4 +1,5 @@
 import React, { JSX } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Tooltip } from '../Tooltip'
 import {
   HomeIcon,
@@ -20,6 +21,8 @@ import ResponsiveContainer from '../Layout/ResponsiveContainer'
 export const Navbar: React.FC<ResponsiveProps> = ({
   isMobile,
 }): JSX.Element => {
+  const navigate = useNavigate()
+
   const position = () => {
     if (isMobile) {
       return 'w-full h-20 fixed top-0 flex-row'
@@ -43,31 +46,56 @@ export const Navbar: React.FC<ResponsiveProps> = ({
       <ResponsiveContainer orientation={isMobile ? 'horizontal' : 'vertical'}>
         {/* Home */}
         <Tooltip text="Home">
-          <Button variant="none" size="sm" className="text-border-primary p-0">
+          <Button
+            variant="none"
+            size="sm"
+            className="text-border-primary p-0"
+            onClick={() => navigate('/feed')}
+          >
             <HomeIcon className="h-6 w-6" />
           </Button>
         </Tooltip>
 
         <Tooltip text="Explore">
-          <Button variant="none" size="sm" className="text-border-primary p-0">
+          <Button
+            variant="none"
+            size="sm"
+            className="text-border-primary p-0"
+            onClick={() => navigate('/explore')}
+          >
             <SearchIcon className="h-6 w-6" />
           </Button>
         </Tooltip>
 
         <Tooltip text="Notifications">
-          <Button variant="none" size="sm" className="text-border-primary p-0">
+          <Button
+            variant="none"
+            size="sm"
+            className="text-border-primary p-0"
+            onClick={() => navigate('/notifications')}
+          >
             <BellIcon className="h-6 w-6" />
           </Button>
         </Tooltip>
 
         <Tooltip text="Planner">
-          <Button variant="none" size="sm" className="text-border-primary p-0">
+          <Button
+            variant="none"
+            size="sm"
+            className="text-border-primary p-0"
+            onClick={() => navigate('/planner')}
+          >
             <CalendarIcon className="h-6 w-6" />
           </Button>
         </Tooltip>
 
         <Tooltip text="Profile">
-          <Button variant="none" size="sm" className="text-border-primary p-0">
+          <Button
+            variant="none"
+            size="sm"
+            className="text-border-primary p-0"
+            onClick={() => navigate('/profile')}
+          >
             <UserIcon className="h-6 w-6" />
           </Button>
         </Tooltip>
