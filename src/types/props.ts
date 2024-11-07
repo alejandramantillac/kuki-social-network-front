@@ -149,3 +149,11 @@ export type SearchBarProps = {
   placeholder?: string
   className?: string
 }
+
+export type ResponsiveProps = {
+  isMobile: boolean
+}
+
+export type MainLayoutProps = ResponsiveProps & {
+  children: React.ReactNode
+}

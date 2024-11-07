@@ -12,9 +12,8 @@ const routes = createRoutesFromElements(
   <Route path="/">
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
-    <Route path="/feed" element={<Feed />} />
     <Route element={<Root />}>
-      <Route path="/" />
+      <Route path="/" element={<Feed />} />
     </Route>
   </Route>
 )

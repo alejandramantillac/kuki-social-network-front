@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Button } from './Button'
 import { Input } from './Input'
@@ -19,11 +19,24 @@ import { Tooltip } from './Tooltip'
 import { Spinner } from './Spinner'
 import { Tabs } from './Tabs'
 import { SearchBar } from './SearchBar'
+import { MainLayout } from './Layout/MainLayout'
 
 export default function Root() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [searchValue, setSearchValue] = useState('')
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   // Simulate loading
   setTimeout(() => setLoading(false), 2000)
@@ -36,9 +49,8 @@ export default function Root() {
 
   return (
     <div className="bg-bg-secondary">
-      <Navbar />
-      <div className="p-4 ml-20">
-        <h1>Root</h1>
+      <Navbar isMobile={isMobile} />
+      <MainLayout isMobile={isMobile}>
         <SearchBar
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -92,18 +104,18 @@ export default function Root() {
           name="dropdown"
           onChange={(e) => console.log(e.target.value)}
         />
-      </div>
-      <Footer>
-        <FooterLinks
-          title="Resources"
-          links={[
-            { name: 'Documentation', href: '#' },
-            { name: 'Tutorials', href: '#' },
-          ]}
-        />
-        <FooterSocial />
-        <FooterCopyright companyName="Kuki" />
-      </Footer>
+        <Footer>
+          <FooterLinks
+            title="Resources"
+            links={[
+              { name: 'Documentation', href: '#' },
+              { name: 'Tutorials', href: '#' },
+            ]}
+          />
+          <FooterSocial />
+          <FooterCopyright companyName="Kuki" />
+        </Footer>
+      </MainLayout>
     </div>
   )
 }
