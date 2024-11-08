@@ -7,6 +7,8 @@ import Root from '../components/Root'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import NotificationsPage from '../pages/NotificationsPage'
+import NotFoundPage from '../pages/NotFoundPage'
+
 import MainLayout from '../components/MainLayout'
 
 const routes = createRoutesFromElements(
@@ -17,6 +19,7 @@ const routes = createRoutesFromElements(
       <Route path="/notifications" element={<NotificationsPage />} />
       <Route path="/" element={<Root />} />
     </Route>
+    <Route path="*" element={<NotFoundPage />} />{' '}
   </Route>
 )
 
