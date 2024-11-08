@@ -1,14 +1,25 @@
 import React from 'react'
-import { Badge } from '../Badge'
+import { Heart, MessageCircle } from 'lucide-react'
 
-const PostFooter: React.FC<{ comments: number; likes: number }> = ({
-  comments,
-  likes,
-}) => {
+const PostFooter: React.FC<{
+  likes?: number
+  comments?: number
+  userLiked?: boolean
+}> = ({ likes, comments, userLiked }) => {
   return (
-    <div className="p-4 border-t border-border-primary flex justify-between">
-      <Badge text={`${comments} comments`} color="gray" />
-      <Badge text={`${likes} likes`} color="gray" />
+    <div className="flex justify-between items-center text-text-secondary">
+      <div className="flex items-center">
+        <button className="flex items-center">
+          <Heart
+            className={`w-5 h-5 mr-1 ${userLiked ? 'text-primary fill-current' : ''}`}
+          />
+          <span className="mr-4">{likes || 0}</span>
+        </button>
+        <button className="flex items-center">
+          <MessageCircle className="w-5 h-5 mr-1" />
+          <span>{comments || 0}</span>
+        </button>
+      </div>
     </div>
   )
 }

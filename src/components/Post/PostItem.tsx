@@ -1,18 +1,42 @@
 import React from 'react'
-import PostHeader from './PostHeader'
+import { Recipe } from '../../types/model'
 import PostImage from './PostImage'
+import PostHeader from './PostHeader'
 import PostDescription from './PostDescription'
 import PostFooter from './PostFooter'
-import { Post } from '../../types/model'
+import { Clock, Globe } from 'lucide-react'
+import PostTags from './PostTags'
+import { formatDuration } from '../../utils/timeUtils'
 
-const PostItem: React.FC<{ post: Post }> = ({ post }) => {
+const PostItem: React.FC<{ post: Recipe }> = ({ post }) => {
   return (
-    <div className="post-item bg-bg-primary shadow-md rounded-lg overflow-hidden mb-4">
-      <PostHeader title={post.title} author={post.author} />
-      <PostImage src={post.image} />
-      <PostDescription description={post.description} />
-      <PostFooter comments={post.comments} likes={post.likes} />
-    </div>
+    <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg">
+      <PostImage
+        src={post.photoUrl}
+        userSaved={post.savedByUser}
+        difficulty={post.difficulty}
+      />
+      <div className="p-4">
+        <PostHeader
+          title={post.title}
+          author={post.recipeOwner.username}
+          authorAvatar={post.recipeOwner.photoUrl}
+        />
+        <PostDescription description={post.description} />
+        <PostTags tags={post.tags} />
+        <div className="flex items-center text-sm text-text-secondary mb-4">
+          <Clock className="w-4 h-4 mr-1" />
+          <span className="mr-4">{formatDuration(post.estimatedTime!)}</span>
+          <Globe className="w-4 h-4 mr-1" />
+          <span>{post.country.name}</span>
+        </div>
+        <PostFooter
+          likes={post.likes}
+          comments={post.comments}
+          userLiked={post.likedByUser}
+        />
+      </div>
+    </article>
   )
 }
 

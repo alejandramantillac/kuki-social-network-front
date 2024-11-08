@@ -1,13 +1,18 @@
 import React from 'react'
+import { Avatar } from '../Avatar'
 
-const PostHeader: React.FC<{ title: string; author: string }> = ({
-  title,
-  author,
-}) => {
+const PostHeader: React.FC<{
+  title: string
+  author: string
+  authorAvatar: string
+}> = ({ title, author, authorAvatar }) => {
   return (
-    <div className="p-4 border-b border-border-primary">
-      <h3 className="text-lg font-bold">{title}</h3>
-      <p className="text-text-secondary">by {author}</p>
+    <div className="flex justify-between items-start mb-2">
+      <h2 className="text-xl font-bold text-text-tertiary">{title}</h2>
+      <div className="flex items-center">
+        <span className="text-sm text-text-secondary mr-2">by {author}</span>
+        <Avatar src={authorAvatar} alt={author} size="sm" />
+      </div>
     </div>
   )
 }
