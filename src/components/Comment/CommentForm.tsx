@@ -1,8 +1,8 @@
 import React from 'react'
 import { Send } from 'lucide-react'
 import Form from '../Form/Form'
-import Input from '../Input'
-import Button from '../Button'
+import { Input } from '../Input'
+import { Button } from '../Button'
 
 type CommentFormProps = {
   onAddComment: (comment: string) => void
@@ -11,9 +11,11 @@ type CommentFormProps = {
 const CommentForm: React.FC<CommentFormProps> = ({ onAddComment }) => {
   const initialValues = { comment: '' }
 
-  const handleSubmit = (values: { [key: string]: string }) => {
-    if (values.comment.trim()) {
-      onAddComment(values.comment)
+  const handleSubmit = async (values: Record<string, unknown>) => {
+    try {
+      onAddComment(values.comment as string)
+    } catch (error) {
+      console.error('An error occurred while submitting the form: ' + error)
     }
   }
 

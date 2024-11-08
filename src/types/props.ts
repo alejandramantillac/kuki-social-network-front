@@ -161,5 +161,5 @@ export type MainLayoutProps = ResponsiveProps & {
 }
 
 export type PostListProps = {
-  filters: PostFilter
+  filters?: PostFilter
 }
