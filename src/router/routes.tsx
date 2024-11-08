@@ -3,21 +3,20 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom'
-import Root from '../components/Root'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import NotificationsPage from '../pages/NotificationsPage'
+import Feed from '../pages/Feed'
+import Root from '../components/Root'
 import NotFoundPage from '../pages/NotFoundPage'
-
-import MainLayout from '../components/MainLayout'
 
 const routes = createRoutesFromElements(
   <Route path="/">
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
-    <Route element={<MainLayout />}>
+    <Route element={<Root />}>
       <Route path="/notifications" element={<NotificationsPage />} />
-      <Route path="/" element={<Root />} />
+      <Route path="/" element={<Feed />} />
     </Route>
     <Route path="*" element={<NotFoundPage />} />{' '}
   </Route>

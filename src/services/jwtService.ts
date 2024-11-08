@@ -1,9 +1,10 @@
 import { jwtDecode } from 'jwt-decode'
 
 type DecodedToken = {
-  username: string
+  sub: string
   roles: string[]
   exp: number
+  photoUrl: string
 }
 
 const TOKEN_KEY = 'jwtToken'
@@ -40,11 +41,15 @@ const getDecodedToken = (): DecodedToken | null => {
 }
 
 const getUsername = (decodedToken: DecodedToken): string => {
-  return decodedToken ? decodedToken.username : ''
+  return decodedToken ? decodedToken.sub : ''
 }
 
 const getRoles = (decodedToken: DecodedToken): string[] => {
   return decodedToken ? decodedToken.roles : []
+}
+
+const getPhotoUrl = (decodedToken: DecodedToken): string => {
+  return decodedToken ? decodedToken.photoUrl : ''
 }
 
 const isTokenExpired = (): boolean => {
@@ -60,5 +65,6 @@ export default {
   getDecodedToken,
   getUsername,
   getRoles,
+  getPhotoUrl,
   isTokenExpired,
 }

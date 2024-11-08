@@ -1,9 +1,11 @@
 import React from 'react'
+import { PostFilter } from './filter'
 
 export type AvatarProps = {
-  src: string
+  src?: string
   alt: string
   size?: 'sm' | 'md' | 'lg'
+  url?: string
 }
 
 export type CardProps = {
@@ -148,4 +150,16 @@ export type SearchBarProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
   className?: string
+}
+
+export type ResponsiveProps = {
+  isMobile: boolean
+}
+
+export type MainLayoutProps = ResponsiveProps & {
+  children: React.ReactNode
+}
+
+export type PostListProps = {
+  filters?: PostFilter
 }

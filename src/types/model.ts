@@ -1,3 +1,15 @@
+export interface Pageable<T> {
+  content: T[]
+  totalPages: number
+  totalElements: number
+  size: number
+  number: number
+  numberOfElements: number
+  first: boolean
+  last: boolean
+  empty: boolean
+}
+
 export type Recipe = {
   id: string
   title: string
@@ -7,17 +19,15 @@ export type Recipe = {
   difficulty: RecipeDifficulty
   country: Country
   estimatedTime?: string
-  steps?: Step[]
-  comments?: Comment[]
-  mealDays?: MealDay[]
-  recipeOwner: User
-  ingredients?: RecipeIngredient[]
+  likes?: number
+  comments?: number
+  recipeOwner: PublicUser
   tags?: Tag[]
-  likes?: User[]
-  usersWhoSaved?: User[]
+  likedByUser?: boolean
+  savedByUser?: boolean
 }
 
-export type RecipeDifficulty = 'EASY' | 'MEDIUM' | 'HARD'
+export type RecipeDifficulty = 'BASIC' | 'INTERMEDIATE' | 'ADVANCED'
 
 export type Country = {
   code: string
@@ -32,8 +42,8 @@ export type Step = {
 export type Comment = {
   id: string
   content: string
-  author: User
-  createdAt: string
+  user: PublicUser
+  creationDate: string
 }
 
 export type MealDay = {
@@ -55,6 +65,12 @@ export type Tag = {
 export type User = {
   username: string
   roles: string[]
+  photoUrl?: string
+}
+
+export type PublicUser = {
+  username: string
+  photoUrl: string
 }
 
 export type Notification = {

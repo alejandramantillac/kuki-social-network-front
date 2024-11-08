@@ -52,6 +52,7 @@ const getUser = (): User | null => {
   return {
     username: jwtService.getUsername(decodedToken),
     roles: jwtService.getRoles(decodedToken),
+    photoUrl: jwtService.getPhotoUrl(decodedToken),
   }
 }
 
