@@ -1,24 +1,58 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import PostItem from './PostItem'
-import { Post } from '../../types/model'
 import postService from '../../services/postService'
+import { Recipe } from '../../types/model'
+import { Spinner } from '../Spinner'
+import NoMoreContent from '../NoMoreContent'
 
 const PostList: React.FC = () => {
-  const [posts, setPosts] = useState<Post[]>([])
+  const [posts, setPosts] = useState<Recipe[]>([])
+  const [page, setPage] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const data = await postService.getPosts()
-      setPosts(data)
+      setLoading(true)
+      const data = await postService.getPosts(undefined, page, 10)
+      setPosts((prevPosts) => {
+        const allPosts = [...prevPosts, ...data]
+        const uniquePosts = Array.from(
+          new Set(allPosts.map((post) => post.id))
+        ).map((id) => allPosts.find((post) => post.id === id))
+        return uniquePosts as Recipe[]
+      })
+      setHasMore(data.length > 0)
+      setLoading(false)
     }
     fetchPosts()
-  }, [])
+  }, [page])
+
+  const handleScroll = useCallback(() => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight ||
+      loading
+    ) {
+      return
+    }
+    setPage((prevPage) => prevPage + 1)
+  }, [loading])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
 
   return (
     <div className="post-list">
       {posts.map((post) => (
         <PostItem key={post.id} post={post} />
       ))}
+      {loading && <Spinner />}
+      {!hasMore && <NoMoreContent />}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { JSX } from 'react'
+import React, { JSX, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Tooltip } from '../Tooltip'
 import {
@@ -8,11 +8,13 @@ import {
   CalendarIcon,
   EditIcon,
   UserIcon,
+  User,
 } from 'lucide-react'
 import { Avatar } from '../Avatar'
 import { Button } from '../Button'
 import { ResponsiveProps } from '../../types/props'
 import ResponsiveContainer from '../Layout/ResponsiveContainer'
+import { AuthContext } from '../../context/AuthContext'
 
 /**
  * Navbar component to display a vertical navigation bar with icons and tooltips.
@@ -22,6 +24,7 @@ export const Navbar: React.FC<ResponsiveProps> = ({
   isMobile,
 }): JSX.Element => {
   const navigate = useNavigate()
+  const authContext = useContext(AuthContext)
 
   const position = () => {
     if (isMobile) {
@@ -37,9 +40,24 @@ export const Navbar: React.FC<ResponsiveProps> = ({
     >
       {/* Avatar */}
       <div className="mt-4">
-        <Tooltip text="Account">
-          <Avatar src="https://example.com/avatar.jpg" alt="Avatar" size="lg" />
-        </Tooltip>
+        {authContext?.isAuthenticated ? (
+          <Tooltip text="Account">
+            <Avatar
+              src="https://example.com/avatar.jpg"
+              alt="Avatar"
+              size="lg"
+            />
+          </Tooltip>
+        ) : (
+          <Button
+            variant="secondary"
+            size="sm"
+            className="p-4"
+            onClick={() => navigate('/login')}
+          >
+            <User className="w-4 h-4" />
+          </Button>
+        )}
       </div>
 
       {/* Navigation Icons */}
