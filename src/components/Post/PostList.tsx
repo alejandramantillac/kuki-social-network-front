@@ -4,8 +4,9 @@ import postService from '../../services/postService'
 import { Recipe } from '../../types/model'
 import { Spinner } from '../Spinner'
 import NoMoreContent from '../NoMoreContent'
+import { PostListProps } from '../../types/props'
 
-const PostList: React.FC = () => {
+const PostList: React.FC<PostListProps> = ({ filters = undefined }) => {
   const [posts, setPosts] = useState<Recipe[]>([])
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -14,7 +15,7 @@ const PostList: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true)
-      const data = await postService.getPosts(undefined, page, 10)
+      const data = await postService.getPosts(filters, page, 10)
       setPosts((prevPosts) => {
         const allPosts = [...prevPosts, ...data]
         const uniquePosts = Array.from(
@@ -26,7 +27,7 @@ const PostList: React.FC = () => {
       setLoading(false)
     }
     fetchPosts()
-  }, [page])
+  }, [page, filters])
 
   const handleScroll = useCallback(() => {
     if (

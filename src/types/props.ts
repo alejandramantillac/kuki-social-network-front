@@ -1,4 +1,5 @@
 import React from 'react'
+import { PostFilter } from './filter'
 
 export type AvatarProps = {
   src?: string
@@ -157,4 +158,8 @@ export type ResponsiveProps = {
 
 export type MainLayoutProps = ResponsiveProps & {
   children: React.ReactNode
+}
+
+export type PostListProps = {
+  filters: PostFilter
 }
