@@ -42,8 +42,8 @@ export type Step = {
 export type Comment = {
   id: string
   content: string
-  author: User
-  createdAt: string
+  user: PublicUser
+  creationDate: string
 }
 
 export type MealDay = {

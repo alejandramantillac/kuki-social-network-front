@@ -34,6 +34,7 @@ const PostItem: React.FC<{ post: Recipe }> = ({ post }) => {
           likes={post.likes}
           comments={post.comments}
           userLiked={post.likedByUser}
+          postId={post.id}
         />
       </div>
     </article>
