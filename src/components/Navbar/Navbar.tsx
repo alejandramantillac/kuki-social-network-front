@@ -43,9 +43,10 @@ export const Navbar: React.FC<ResponsiveProps> = ({
         {authContext?.isAuthenticated ? (
           <Tooltip text="Account">
             <Avatar
-              src="https://example.com/avatar.jpg"
+              src={authContext?.currentUser?.photoUrl}
               alt="Avatar"
               size="lg"
+              url={`/user/${authContext?.currentUser?.username}`}
             />
           </Tooltip>
         ) : (
@@ -68,7 +69,7 @@ export const Navbar: React.FC<ResponsiveProps> = ({
             variant="none"
             size="sm"
             className="text-border-primary p-0"
-            onClick={() => navigate('/feed')}
+            onClick={() => navigate('/')}
           >
             <HomeIcon className="h-6 w-6" />
           </Button>

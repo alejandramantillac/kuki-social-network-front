@@ -23,7 +23,13 @@ export const Avatar: React.FC<AvatarProps> = ({
   }
 
   const avatarImage = (
-    <img src={src} alt={alt} className={`rounded-full ${sizeClasses[size]}`} />
+    <div className={`${sizeClasses[size]}`}>
+      <img
+        src={src}
+        alt={alt}
+        className={`rounded-full ${sizeClasses[size]} object-cover object-center`}
+      />
+    </div>
   )
 
   return url ? <a href={url}>{avatarImage}</a> : avatarImage

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export type AvatarProps = {
-  src: string
+  src?: string
   alt: string
   size?: 'sm' | 'md' | 'lg'
   url?: string
