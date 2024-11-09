@@ -137,6 +137,7 @@ export type FormProps = {
   validate?: (values: Record<string, unknown>) => Record<string, string>
   children: React.ReactNode
   submitText?: string
+  submitButton?: boolean
 }
 
 export type LinkedTextProps = {

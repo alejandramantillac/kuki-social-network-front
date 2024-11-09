@@ -40,7 +40,7 @@ export type Step = {
 }
 
 export type Comment = {
-  id: string
+  commentId: string
   content: string
   user: PublicUser
   creationDate: string
@@ -58,7 +58,6 @@ export type RecipeIngredient = {
 }
 
 export type Tag = {
-  id: string
   name: string
 }
 
@@ -71,6 +70,17 @@ export type User = {
 export type PublicUser = {
   username: string
   photoUrl: string
+}
+
+export type Like = {
+  recipeId: string
+  user: PublicUser
+  liked: boolean
+}
+
+export type DeleteResponse = {
+  message: string
+  deleted: boolean
 }
 
 export type Notification = {

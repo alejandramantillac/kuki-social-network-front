@@ -7,7 +7,7 @@ const PostTags: React.FC<{ tags?: Tag[] }> = ({ tags }) => {
       {tags &&
         tags.map((tag: Tag) => (
           <span
-            key={tag.id}
+            key={tag.name}
             className="bg-secondary text-text-secondary text-xs px-2 py-1 rounded-full"
           >
             #{tag.name}
