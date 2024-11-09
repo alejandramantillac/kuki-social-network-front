@@ -19,7 +19,7 @@ const getComments = async (
 
 const addComment = async (
   recipeId: string,
-  commentRequest: { content: string; parentCommentId?: string }
+  commentRequest: { content: string; parentCommentId: string | null }
 ): Promise<Comment> => {
   const response = await axiosInstance.post<Comment>(
     `${API_PATH}/recipe/${recipeId}`,

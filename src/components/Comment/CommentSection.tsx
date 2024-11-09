@@ -46,7 +46,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId, onClose }) => {
         setComments((prevComments) =>
           prevComments.map((c) =>
             c.commentId === responseTo
-              ? { ...c, replies: [...(c.replies || []), newComment] }
+              ? { ...c, replies: [...[newComment]] }
               : c
           )
         )
@@ -66,19 +66,22 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId, onClose }) => {
         prevComments
           .map((comment) => ({
             ...comment,
-            replies: comment.replies?.filter(
-              (reply) => reply.commentId !== commentId
-            ),
+            replies: [],
           }))
           .filter((comment) => comment.commentId !== commentId)
       )
+      commentIds.current.delete(commentId)
     } catch (error) {
       console.error('Error deleting comment:', error)
     }
   }
 
-  const userOfComment = (id: string) => {
-    return comments.find((comment) => comment.commentId === id)?.user.username
+  const userOfComment = (id: string | null): string | null => {
+    if (!id) return null
+    return (
+      comments.find((comment) => comment.commentId === id)?.user.username ||
+      null
+    )
   }
 
   const handleClose = () => {

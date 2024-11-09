@@ -54,22 +54,31 @@ const Form: React.FC<FormProps> = ({
   }
 
   const cloneWithProps = (child: React.ReactNode): React.ReactNode => {
-    if (React.isValidElement(child) && child.props.name) {
+    if (
+      React.isValidElement(child) &&
+      (child.props as { name?: string }).name
+    ) {
       return React.cloneElement(
         child as React.ReactElement<typeof child.props>,
         {
           onChange: handleChange,
-          value: values[child.props.name] || '',
-          errors: errors[child.props.name],
+          value: values[(child.props as { name: string }).name] || '',
+          errors: errors[(child.props as { name: string }).name],
         }
       )
     }
 
-    if (React.isValidElement(child) && child.props.children) {
+    if (
+      React.isValidElement(child) &&
+      (child.props as { children?: React.ReactNode }).children
+    ) {
       return React.cloneElement(
         child,
         {},
-        React.Children.map(child.props.children, cloneWithProps)
+        React.Children.map(
+          (child.props as { children: React.ReactNode }).children,
+          cloneWithProps
+        )
       )
     }
 

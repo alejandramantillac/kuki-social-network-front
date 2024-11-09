@@ -25,7 +25,7 @@ const CommentList: React.FC<CommentListProps> = ({
       ) : (
         comments.map((comment) => (
           <CommentItem
-            key={comment.id}
+            key={comment.commentId}
             comment={comment}
             setResponseTo={setResponseTo}
             onDelete={onDelete}

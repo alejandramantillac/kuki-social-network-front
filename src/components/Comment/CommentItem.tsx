@@ -21,7 +21,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
   isChild = false,
 }) => {
   const [showReplies, setShowReplies] = useState(false)
-  const [replies, setReplies] = useState<Comment[]>(comment.replies || [])
+  const [replies, setReplies] = useState<Comment[]>([])
   const [loadingReplies, setLoadingReplies] = useState(false)
   const isAuthor = authService.getUser()?.username === comment.user.username
 
