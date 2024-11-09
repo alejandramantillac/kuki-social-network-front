@@ -63,9 +63,11 @@ export type Tag = {
 }
 
 export type User = {
+  id: number
   username: string
   roles: string[]
   photoUrl?: string
+  avatarUrl: string
 }
 
 export type PublicUser = {
