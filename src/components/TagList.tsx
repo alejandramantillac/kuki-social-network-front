@@ -13,21 +13,19 @@ const TagList: React.FC<TagListProps> = ({ tags }) => {
   }
 
   return (
-    <div className="flex flex-col gap-3 bg-white p-4 rounded-lg shadow-md w-full max-w-sm">
+    <div className="flex flex-col gap-3 bg-white p-4 rounded-lg shadow-md w-full">
       {tags.slice(0, 5).map((tag) => (
         <div
           key={tag.tagName}
           className="flex flex-col border-b border-gray-200 pb-3"
         >
           <span className="text-xs text-gray-500">
-            Tendencia en {tag.country}
+            Trending in {tag.country}
           </span>
-          <span className="font-semibold text-sm text-black">
+          <span className="font-semibold text-sm sm:text-base text-black">
             {tag.tagName}
           </span>
-          <span className="text-xs text-gray-400">
-            {tag.usageCount} publicaciones
-          </span>
+          <span className="text-xs text-gray-400">{tag.usageCount} posts</span>
         </div>
       ))}
     </div>

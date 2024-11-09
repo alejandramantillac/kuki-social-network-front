@@ -12,8 +12,8 @@ import { ChefHat, Users } from 'lucide-react'
  */
 const FollowList: React.FC<FollowListProps> = ({ users }) => {
   return (
-    <div className="bg-bg-primary p-6 rounded-lg shadow-lg w-full max-w-sm">
-      <div className="flex items-center gap-2 mb-6">
+    <div className="bg-bg-primary p-4 sm:p-6 rounded-lg shadow-lg w-full">
+      <div className="flex items-center gap-2 mb-4 sm:mb-6">
         <ChefHat className="h-5 w-5 text-primary" />
         <h2 className="text-lg font-bold text-text-tertiary">
           Chefs to Follow
@@ -27,19 +27,19 @@ const FollowList: React.FC<FollowListProps> = ({ users }) => {
             className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary-hover transition-colors duration-200"
           >
             <div className="flex items-center gap-3">
-              <Avatar src={user.photoUrl} alt={user.name} size="md" />
+              <Avatar src={user.photoUrl} alt={user.name} size="sm" />
               <div>
-                <span className="font-medium text-text-tertiary block">
+                <span className="font-medium text-text-tertiary block text-sm sm:text-base">
                   {user.name}
                 </span>
-                <span className="text-sm text-text-secondary">
+                <span className="text-xs sm:text-sm text-text-secondary">
                   @{user.username}
                 </span>
               </div>
             </div>
             <Button
               variant="outline"
-              className="border-primary text-primary hover:bg-secondary-hover hover:text-primary-hover transition-colors duration-200"
+              className="border-primary text-primary hover:bg-secondary-hover hover:text-primary-hover transition-colors duration-200 text-xs sm:text-sm"
               size="sm"
             >
               Follow
@@ -48,7 +48,7 @@ const FollowList: React.FC<FollowListProps> = ({ users }) => {
         ))}
       </div>
 
-      <div className="mt-6 pt-4 border-t border-gray-100">
+      <div className="mt-4 sm:mt-6 pt-4 border-t border-gray-100">
         <button className="flex items-center gap-2 text-primary hover:text-primary-hover text-sm font-medium transition-colors duration-200 w-full justify-center">
           <Users className="h-4 w-4" />
           <span>See more chefs</span>

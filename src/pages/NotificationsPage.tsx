@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Notifications from '../components/Notifications/Notifications'
-import { SearchBar } from '../components/SearchBar'
+import SidebarContent from '../components/SidebarContent'
 
 /**
  * NotificationsPage component to display the notifications page.
@@ -12,21 +12,16 @@ import { SearchBar } from '../components/SearchBar'
  * <NotificationsPage />
  */
 const NotificationsPage: React.FC = () => {
-  const [searchValue, setSearchValue] = useState('')
-
   return (
-    <div className="notifications-page grid grid-cols-4 gap-4 p-4 bg-bg-secondary min-h-screen">
-      <div className="col-span-3">
+    <div className="notifications-page grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-bg-secondary min-h-screen">
+      <div className="md:col-span-3 flex flex-col">
         <h1 className="text-2xl font-bold mb-4">Notificaciones</h1>
-        <Notifications />
+        <div className="flex-grow">
+          <Notifications />
+        </div>
       </div>
-      <div className="col-span-1">
-        <SearchBar
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Search..."
-          className="h-full"
-        />
+      <div className="md:col-span-1">
+        <SidebarContent />
       </div>
     </div>
   )
