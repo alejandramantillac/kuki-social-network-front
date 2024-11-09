@@ -19,6 +19,7 @@ const Form: React.FC<FormProps> = ({
   validate,
   children,
   submitText = 'Submit',
+  submitButton = true,
 }) => {
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -44,6 +45,7 @@ const Form: React.FC<FormProps> = ({
     setIsSubmitting(true)
     try {
       await onSubmit(values)
+      setValues(initialValues)
     } catch (error) {
       console.error('An error occurred while submitting the form: ' + error)
     } finally {
@@ -51,24 +53,37 @@ const Form: React.FC<FormProps> = ({
     }
   }
 
+  const cloneWithProps = (child: React.ReactNode): React.ReactNode => {
+    if (React.isValidElement(child) && child.props.name) {
+      return React.cloneElement(
+        child as React.ReactElement<typeof child.props>,
+        {
+          onChange: handleChange,
+          value: values[child.props.name] || '',
+          errors: errors[child.props.name],
+        }
+      )
+    }
+
+    if (React.isValidElement(child) && child.props.children) {
+      return React.cloneElement(
+        child,
+        {},
+        React.Children.map(child.props.children, cloneWithProps)
+      )
+    }
+
+    return child
+  }
+
   return (
     <form onSubmit={handleSubmit}>
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && child.props.name) {
-          return React.cloneElement(
-            child as React.ReactElement<typeof child.props>,
-            {
-              onChange: handleChange,
-              value: values[child.props.name] || '',
-              errors: errors[child.props.name],
-            }
-          )
-        }
-        return child
-      })}
-      <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
-        {isSubmitting ? <Spinner /> : submitText}
-      </Button>
+      {React.Children.map(children, cloneWithProps)}
+      {submitButton && (
+        <Button type="submit" disabled={isSubmitting} className="w-full mt-2">
+          {isSubmitting ? <Spinner /> : submitText}
+        </Button>
+      )}
     </form>
   )
 }

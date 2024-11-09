@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { X } from 'lucide-react'
 import commentService from '../../services/commentService'
 import { Comment } from '../../types/model'
@@ -12,21 +12,73 @@ type CommentSectionProps = {
 
 const CommentSection: React.FC<CommentSectionProps> = ({ postId, onClose }) => {
   const [comments, setComments] = useState<Comment[]>([])
-  const [loading, setLoading] = useState(true)
+  const [responseTo, setResponseTo] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
+  const [page, setPage] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const commentIds = useRef<Set<string>>(new Set())
+
+  const fetchComments = useCallback(async () => {
+    setLoading(true)
+    const data = await commentService.getComments(postId, page)
+    const newComments = data.filter(
+      (comment) => !commentIds.current.has(comment.commentId)
+    )
+    newComments.forEach((comment) => commentIds.current.add(comment.commentId))
+    setComments((prevComments) => [...prevComments, ...newComments])
+    setHasMore(data.length > 0)
+    setLoading(false)
+  }, [postId, page])
 
   useEffect(() => {
-    const fetchComments = async () => {
-      setLoading(true)
-      const data = await commentService.getComments(postId)
-      setComments(data)
-      setLoading(false)
-    }
     fetchComments()
-  }, [postId])
+  }, [fetchComments])
 
-  const handleAddComment = (comment: string) => {
-    console.log('Nuevo comentario:', comment)
+  const handleAddComment = async (comment: string) => {
+    try {
+      const newComment = await commentService.addComment(postId, {
+        content: comment,
+        parentCommentId: responseTo,
+      })
+      if (responseTo) {
+        setComments((prevComments) =>
+          prevComments.map((c) =>
+            c.commentId === responseTo
+              ? { ...c, replies: [...(c.replies || []), newComment] }
+              : c
+          )
+        )
+      } else {
+        setComments([...comments, newComment])
+      }
+      setResponseTo(null)
+    } catch (error) {
+      console.error('Error adding comment:', error)
+    }
+  }
+
+  const onDelete = async (commentId: string) => {
+    try {
+      await commentService.deleteComment(commentId)
+      setComments((prevComments) =>
+        prevComments
+          .map((comment) => ({
+            ...comment,
+            replies: comment.replies?.filter(
+              (reply) => reply.commentId !== commentId
+            ),
+          }))
+          .filter((comment) => comment.commentId !== commentId)
+      )
+    } catch (error) {
+      console.error('Error deleting comment:', error)
+    }
+  }
+
+  const userOfComment = (id: string) => {
+    return comments.find((comment) => comment.commentId === id)?.user.username
   }
 
   const handleClose = () => {
@@ -44,6 +96,25 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId, onClose }) => {
       document.body.style.overflow = 'auto'
     }
   }, [isVisible])
+
+  const handleScroll = useCallback(() => {
+    if (!containerRef.current) return
+
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.current
+    if (scrollTop + clientHeight >= scrollHeight - 5 && !loading && hasMore) {
+      setPage((prevPage) => prevPage + 1)
+    }
+  }, [loading, hasMore])
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (container) {
+      container.addEventListener('scroll', handleScroll)
+      return () => {
+        container.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [handleScroll])
 
   return (
     <>
@@ -66,9 +137,20 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId, onClose }) => {
             </button>
           </div>
 
-          <CommentList comments={comments} loading={loading} />
+          <div className="flex-grow overflow-y-auto" ref={containerRef}>
+            <CommentList
+              comments={comments}
+              loading={loading}
+              setResponseTo={setResponseTo}
+              onDelete={onDelete}
+            />
+          </div>
 
-          <CommentForm onAddComment={handleAddComment} />
+          <CommentForm
+            onAddComment={handleAddComment}
+            responseTo={userOfComment(responseTo)}
+            setResponseTo={setResponseTo}
+          />
         </div>
       </div>
     </>

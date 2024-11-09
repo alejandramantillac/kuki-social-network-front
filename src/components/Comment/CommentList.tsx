@@ -6,16 +6,30 @@ import { Spinner } from '../Spinner'
 type CommentListProps = {
   comments: Comment[]
   loading: boolean
+  setResponseTo: (commentId: string) => void
+  onDelete: (commentId: string) => void
 }
 
-const CommentList: React.FC<CommentListProps> = ({ comments, loading }) => {
+const CommentList: React.FC<CommentListProps> = ({
+  comments,
+  loading,
+  setResponseTo,
+  onDelete,
+}) => {
   return (
-    <div className="flex-grow overflow-y-auto p-4 space-y-4">
+    <div className="flex-grow p-4 space-y-4">
       {loading ? (
-        <Spinner />
+        <div className="flex justify-center items-center h-full">
+          <Spinner />
+        </div>
       ) : (
         comments.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
+          <CommentItem
+            key={comment.id}
+            comment={comment}
+            setResponseTo={setResponseTo}
+            onDelete={onDelete}
+          />
         ))
       )}
     </div>
