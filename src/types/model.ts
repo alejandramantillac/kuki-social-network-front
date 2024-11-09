@@ -59,12 +59,18 @@ export type RecipeIngredient = {
 
 export type Tag = {
   name: string
+  tagName: string
+  country: string
+  usageCount: number
 }
 
 export type User = {
+  id: string
   username: string
+  name: string
   roles: string[]
   photoUrl?: string
+  avatarUrl: string
 }
 
 export type PublicUser = {

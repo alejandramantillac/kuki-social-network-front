@@ -1,5 +1,7 @@
 import React from 'react'
 import { PostFilter } from './filter'
+import { Tag } from './model'
+import { User } from './model'
 
 export type AvatarProps = {
   src?: string
@@ -163,4 +165,12 @@ export type MainLayoutProps = ResponsiveProps & {
 
 export type PostListProps = {
   filters?: PostFilter
+}
+
+export type TagListProps = {
+  tags: Tag[]
+}
+
+export type FollowListProps = {
+  users: User[]
 }

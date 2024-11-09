@@ -8,6 +8,7 @@ import Register from '../pages/Register'
 import NotificationsPage from '../pages/NotificationsPage'
 import Feed from '../pages/Feed'
 import Root from '../components/Root'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const routes = createRoutesFromElements(
   <Route path="/">
@@ -17,6 +18,7 @@ const routes = createRoutesFromElements(
       <Route path="/notifications" element={<NotificationsPage />} />
       <Route path="/" element={<Feed />} />
     </Route>
+    <Route path="*" element={<NotFoundPage />} />{' '}
   </Route>
 )
 
