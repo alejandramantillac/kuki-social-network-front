@@ -1,10 +1,13 @@
 import { jwtDecode } from 'jwt-decode'
 
 type DecodedToken = {
+  id: string
   sub: string
+  name: string
   roles: string[]
   exp: number
   photoUrl: string
+  avatarUrl: string
 }
 
 const TOKEN_KEY = 'jwtToken'
