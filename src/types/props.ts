@@ -174,3 +174,10 @@ export type TagListProps = {
 export type FollowListProps = {
   users: User[]
 }
+
+export type TextAreaProps =
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    label?: string
+    icon?: React.ReactNode
+    errors?: string
+  }

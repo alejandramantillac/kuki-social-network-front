@@ -67,10 +67,22 @@ export type Tag = {
 export type User = {
   id: string
   username: string
-  name: string
+  email: string
+  fullName: string
+  password: string
+  photoUrl: string
+  biography: string
+  socialMedia: Record<string, unknown>
+  registerDate: string
+  userStatus: string
+  country: Country
+  lastConnection: string
   roles: string[]
-  photoUrl?: string
-  avatarUrl: string
+  notifications: Notification[]
+  recipes: Recipe[]
+  comments: Comment[]
+  likes: Recipe[]
+  savedRecipes: Recipe[]
 }
 
 export type PublicUser = {
