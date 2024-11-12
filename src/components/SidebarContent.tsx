@@ -4,7 +4,7 @@ import TagList from './TagList'
 import FollowList from './FollowList'
 import tagService from '../services/tagService'
 import userService from '../services/userService'
-import { Tag, User } from '../types/model'
+import { Tag, AuthUser } from '../types/model'
 
 /**
  * SidebarContent component to display a search bar, a list of trending tags, and a list of users to follow.
@@ -17,7 +17,7 @@ import { Tag, User } from '../types/model'
 const SidebarContent: React.FC = () => {
   const [searchValue, setSearchValue] = useState('')
   const [tags, setTags] = useState<Tag[]>([])
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<AuthUser[]>([])
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {

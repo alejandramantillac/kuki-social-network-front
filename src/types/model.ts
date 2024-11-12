@@ -15,6 +15,7 @@ export type Recipe = {
   title: string
   description: string
   photoUrl: string
+  avatarUrl: string
   publishDate?: string
   difficulty: RecipeDifficulty
   country: Country
@@ -64,13 +65,24 @@ export type Tag = {
   usageCount: number
 }
 
+export type AuthUser = {
+  id: string
+  username: string
+  name: string
+  roles: string[]
+  photoUrl?: string
+  avatarUrl: string
+}
+
 export type User = {
   id: string
   username: string
+  name: string
   email: string
   fullName: string
   password: string
   photoUrl: string
+  avatarUrl: string // Add this line
   biography: string
   socialMedia: Record<string, unknown>
   registerDate: string

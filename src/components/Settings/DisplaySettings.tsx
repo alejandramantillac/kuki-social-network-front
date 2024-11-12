@@ -46,10 +46,9 @@ const DisplaySettings: React.FC = () => {
                   text="Light Mode"
                   color="gray"
                   className="flex items-center cursor-pointer"
-                >
-                  <Sun className="h-4 w-4 mr-2" />
-                  Light Mode
-                </Badge>
+                />
+                <Sun className="h-4 w-4 mr-2" />
+                Light Mode
               </>
             )}
           </RadioGroup.Option>
@@ -67,10 +66,9 @@ const DisplaySettings: React.FC = () => {
                   text="Dark Mode"
                   color="gray"
                   className="flex items-center cursor-pointer"
-                >
-                  <Moon className="h-4 w-4 mr-2" />
-                  Dark Mode
-                </Badge>
+                />
+                <Moon className="h-4 w-4 mr-2" />
+                Dark Mode
               </>
             )}
           </RadioGroup.Option>

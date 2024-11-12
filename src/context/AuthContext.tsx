@@ -1,11 +1,11 @@
 import React, { createContext, ReactNode } from 'react'
 import authService from '../services/authService'
-import { User } from '../types/model'
+import { AuthUser } from '../types/model'
 
 type AuthContextProps = {
   hasRoles(roles: string[]): boolean
   isAuthenticated: boolean
-  currentUser: User | null
+  currentUser: AuthUser | null
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined)

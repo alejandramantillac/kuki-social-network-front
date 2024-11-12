@@ -1,7 +1,7 @@
 import React from 'react'
 import { PostFilter } from './filter'
 import { Tag } from './model'
-import { User } from './model'
+import { AuthUser } from './model'
 
 export type AvatarProps = {
   src?: string
@@ -113,6 +113,7 @@ export type AlertProps = {
 export type BadgeProps = {
   text: string
   color?: 'gray' | 'red' | 'green' | 'blue' | 'yellow' | 'primary' | 'secondary'
+  className?: string
 }
 
 export type TooltipProps = {
@@ -172,7 +173,7 @@ export type TagListProps = {
 }
 
 export type FollowListProps = {
-  users: User[]
+  users: AuthUser[]
 }
 
 export type TextAreaProps =
