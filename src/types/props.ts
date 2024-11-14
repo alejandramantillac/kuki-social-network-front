@@ -149,3 +149,9 @@ export type SearchBarProps = {
   placeholder?: string
   className?: string
 }
+
+export type StepModalProps = {
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
+}
