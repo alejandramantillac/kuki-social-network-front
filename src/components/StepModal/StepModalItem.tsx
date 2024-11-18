@@ -14,6 +14,8 @@ import { Step } from '../../types/model'
 const StepModalItem: React.FC<{ step: Step }> = ({ step }) => {
   return (
     <div className="step-modal-item p-4 mb-4 rounded-lg shadow-md bg-white">
+      <h2>Step # {step.number}</h2>
+      <img src={step.multimediaUrl} alt="StepImage" />
       <p className="text-lg font-semibold">{step.description}</p>
     </div>
   )

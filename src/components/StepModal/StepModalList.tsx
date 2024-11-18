@@ -22,6 +22,8 @@ const StepModalList: React.FC<{ steps: Step[] }> = ({ steps }) => {
       {steps.map((step) => (
         <StepModalItem key={step.id} step={step} />
       ))}
+
+      {steps.length === 0 && <p>No steps found</p>}
     </div>
   )
 }

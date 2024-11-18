@@ -26,7 +26,9 @@ export type Country = {
 
 export type Step = {
   id: string
+  number: number
   description: string
+  multimediaUrl?: string
 }
 
 export type Comment = {

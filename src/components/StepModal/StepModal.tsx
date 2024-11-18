@@ -8,6 +8,7 @@ import { StepModalProps } from '../../types/props'
 import { Step } from '../../types/model'
 import stepService from '../../services/stepService'
 import StepModalList from './StepModalList'
+import { Spinner } from '../Spinner'
 
 export const StepModal: React.FC<StepModalProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState<Step[]>([])
@@ -35,11 +36,11 @@ export const StepModal: React.FC<StepModalProps> = ({ isOpen, onClose }) => {
   return (
     <div className="p-4 ml-20">
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalHeader title="Step Title" onClose={onClose} />
+        <ModalHeader title="Steps" onClose={onClose} />
         <ModalBody>
           {loading ? (
-            <div className="flex justify-center items-center h-64">
-              <div className="text-lg font-semibold">Loading...</div>
+            <div className="flex justify-center items-center h-100">
+              <Spinner size="md" />
             </div>
           ) : (
             <StepModalList steps={step} />

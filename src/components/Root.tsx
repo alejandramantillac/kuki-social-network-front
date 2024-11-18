@@ -2,10 +2,6 @@ import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Button } from './Button'
 import { Input } from './Input'
-import { Modal } from './Modal/Modal'
-import { ModalBody } from './Modal/ModalBody'
-import { ModalFooter } from './Modal/ModalFooter'
-import { ModalHeader } from './Modal/ModalHeader'
 import { Footer } from './Footer/Footer'
 import { FooterCopyright } from './Footer/FooterCopyright'
 import { FooterLinks } from './Footer/FooterLinks'
@@ -18,6 +14,7 @@ import { Tooltip } from './Tooltip'
 import { Spinner } from './Spinner'
 import { Tabs } from './Tabs'
 import { SearchBar } from './SearchBar'
+import { StepModal } from './StepModal/StepModal'
 
 export default function Root() {
   const [isOpen, setIsOpen] = useState(false)
@@ -63,21 +60,7 @@ export default function Root() {
           </div>
         )}
         <Outlet />
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <ModalHeader title="Modal Title" onClose={() => setIsOpen(false)} />
-          <ModalBody>
-            <p>This is the modal body content.</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              variant="secondary"
-              size="md"
-              onClick={() => setIsOpen(false)}
-            >
-              Close
-            </Button>
-          </ModalFooter>
-        </Modal>
+        <StepModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
         <Dropdown
           title="Select an option"
           options={[
