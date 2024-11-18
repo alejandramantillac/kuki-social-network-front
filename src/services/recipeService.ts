@@ -1,11 +1,8 @@
+// recipeService.ts
 import axiosInstance from '../config/axiosConfig'
-import { Recipe } from '../types/model'
+import { Recipe, CreateRecipeRequest, RecipeResponse } from '../types/model'
 
 const API_PATH = 'v1/recipes'
-
-type RecipeResponse = {
-  content: Recipe[]
-}
 
 /**
  * Searches for recipes based on the title.
@@ -19,6 +16,30 @@ const searchRecipes = async (title: string): Promise<Recipe[]> => {
   return response.data.content
 }
 
+/**
+ * Creates a new recipe.
+ * @param {CreateRecipeRequest} data - The recipe data to create.
+ * @returns {Promise<Recipe>} A promise that resolves to the created recipe.
+ */
+const createRecipe = async (data: CreateRecipeRequest): Promise<Recipe> => {
+  const formData = new FormData()
+  formData.append('title', data.title)
+  formData.append('description', data.description)
+  formData.append('difficulty', data.difficulty)
+  formData.append('country', data.country)
+  if (data.image) {
+    formData.append('image', data.image)
+  }
+
+  const response = await axiosInstance.post<Recipe>(API_PATH, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  return response.data
+}
+
 export default {
   searchRecipes,
+  createRecipe,
 }

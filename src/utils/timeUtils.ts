@@ -1,4 +1,8 @@
-export const formatDuration = (duration: string): string => {
+export const formatDuration = (duration: string | null): string => {
+  if (!duration) {
+    return 'Invalid duration'
+  }
+
   const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/
   const matches = duration.match(regex)
 

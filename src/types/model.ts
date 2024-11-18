@@ -120,3 +120,35 @@ export type Notification = {
   creationDate: string
   url?: string
 }
+
+export type CreateRecipeRequest = {
+  title: string
+  description: string
+  difficulty: RecipeDifficulty
+  country: string
+  image?: File
+}
+
+export type RecipeResponse = {
+  content: Recipe[]
+  id: string
+  title: string
+  description: string
+  photoUrl: string
+  publishDate?: string
+  difficulty: RecipeDifficulty
+  country: Country
+  estimatedTime?: string
+  likes?: number
+  comments?: number
+  recipeOwner: PublicUser
+  tags?: Tag[]
+  likedByUser?: boolean
+  savedByUser?: boolean
+}
+
+export type Ingredient = {
+  id: string
+  name: string
+  quantity: string
+}
