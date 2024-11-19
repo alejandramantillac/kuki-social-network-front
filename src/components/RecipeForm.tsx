@@ -4,9 +4,11 @@ import {
   Country,
   Ingredient,
   RecipeDifficulty,
+  Tag,
 } from '../types/model'
 import recipeService from '../services/recipeService'
 import ingredientService from '../services/ingredientService'
+import tagService from '../services/tagService'
 import Form from './Form/Form'
 import { Input } from './Input'
 import { Dropdown } from './Dropdown'
@@ -34,6 +36,8 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ countries, onSuccess }) => {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [image, setImage] = useState<File | null>(null)
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
+  const [tags, setTags] = useState<Tag[]>([])
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedIngredients, setSelectedIngredients] = useState<
     { ingredient: Ingredient; quantity: string }[]
   >([])
@@ -55,7 +59,17 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ countries, onSuccess }) => {
       }
     }
 
+    const fetchTags = async () => {
+      try {
+        const response = await tagService.getTags()
+        setTags(response)
+      } catch (error) {
+        console.error('Error fetching tags:', error)
+      }
+    }
+
     fetchIngredients()
+    fetchTags()
   }, [])
 
   const validate = (values: Record<string, unknown>) => {
@@ -71,7 +85,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ countries, onSuccess }) => {
     if (selectedIngredients.length === 0)
       validationErrors.ingredients = 'Ingredients are required'
     if (!values.steps) validationErrors.steps = 'Steps are required'
-    if (!values.tags) validationErrors.tags = 'Tags are required'
+    if (selectedTags.length === 0) validationErrors.tags = 'Tags are required'
     return validationErrors
   }
 
@@ -119,6 +133,14 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ countries, onSuccess }) => {
     setSelectedIngredients((prev) =>
       prev.filter((ing) => ing.ingredient.id !== ingredient.id)
     )
+  }
+
+  const handleTagSelect = (tag: string) => {
+    setSelectedTags((prev) => [...prev, tag])
+  }
+
+  const handleTagRemove = (tag: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tag))
   }
 
   return (
@@ -318,10 +340,37 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ countries, onSuccess }) => {
             >
               Tags
             </label>
-            <Input id="tags" name="tags" className="w-full" />
+            <Dropdown
+              title="Select Tags"
+              name="tags"
+              value=""
+              options={tags.map((tag) => ({
+                value: tag.name,
+                label: tag.name,
+              }))}
+              onChange={(e) => handleTagSelect(e.target.value)}
+              className="w-full"
+            />
             {errors.tags && (
               <span className="text-red-500 text-sm">{errors.tags}</span>
             )}
+            <div className="mt-2 space-y-2">
+              {selectedTags.map((tag) => (
+                <div
+                  key={tag}
+                  className="flex items-center justify-between bg-bg-secondary p-2 rounded-md"
+                >
+                  <span className="text-text-secondary">{tag}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleTagRemove(tag)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div>
