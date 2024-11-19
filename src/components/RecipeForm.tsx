@@ -45,8 +45,8 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ countries, onSuccess }) => {
     const fetchIngredients = async () => {
       try {
         const response = await ingredientService.getIngredients(0, 10)
-        if (response && Array.isArray(response)) {
-          setIngredients(response)
+        if (response && Array.isArray(response.content)) {
+          setIngredients(response.content)
         } else {
           console.error('Unexpected response format:', response)
         }

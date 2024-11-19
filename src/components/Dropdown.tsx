@@ -89,8 +89,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
           setIsOpen(!isOpen)
         }}
         className={`flex items-center px-3 py-2 rounded-md text-sm font-medium text-text-secondary hover:bg-secondary hover:text-primary ${className}`}
+        aria-label={title}
       >
-        {value
+        {value && value !== ''
           ? options.find((option) => option.value === value)?.label
           : title}
       </button>

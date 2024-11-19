@@ -3,6 +3,10 @@ import { Ingredient } from '../types/model'
 
 const API_PATH = 'v1/ingredients'
 
+type IngredientResponse = {
+  content: Ingredient[]
+}
+
 /**
  * Fetches ingredients from the server.
  * @param {number} page - The page number to fetch.
@@ -12,8 +16,8 @@ const API_PATH = 'v1/ingredients'
 const getIngredients = async (
   page: number = 0,
   size: number = 10
-): Promise<Ingredient[]> => {
-  const response = await axiosInstance.get<Ingredient[]>(API_PATH, {
+): Promise<IngredientResponse> => {
+  const response = await axiosInstance.get<IngredientResponse>(API_PATH, {
     params: { page, size },
   })
   return response.data
