@@ -153,4 +153,5 @@ export type SearchBarProps = {
 export type StepModalProps = {
   isOpen: boolean
   onClose: () => void
+  id: string
 }

@@ -10,14 +10,18 @@ import stepService from '../../services/stepService'
 import StepModalList from './StepModalList'
 import { Spinner } from '../Spinner'
 
-export const StepModal: React.FC<StepModalProps> = ({ isOpen, onClose }) => {
+export const StepModal: React.FC<StepModalProps> = ({
+  isOpen,
+  onClose,
+  id,
+}) => {
   const [step, setStep] = useState<Step[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchStep = async () => {
       try {
-        const data = await stepService.getSteps()
+        const data = await stepService.getSteps(id)
         if (Array.isArray(data)) {
           setStep(data)
         } else {
