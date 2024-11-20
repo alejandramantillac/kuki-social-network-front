@@ -60,7 +60,7 @@ export default function Root() {
           </div>
         )}
         <Outlet />
-        <StepModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        <StepModal isOpen={isOpen} onClose={() => setIsOpen(false)} id="" />
         <Dropdown
           title="Select an option"
           options={[
