@@ -27,7 +27,7 @@ const getCurrentUser = async (): Promise<User> => {
  * @returns {Promise<User>} A promise that resolves to the updated user's information.
  */
 const updateCurrentUser = async (userData: Partial<User>): Promise<User> => {
-  const response = await axiosInstance.put<User>(API_PATH, userData)
+  const response = await axiosInstance.put<User>(`${API_PATH}/me`, userData)
   return response.data
 }
 

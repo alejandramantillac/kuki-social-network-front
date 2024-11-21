@@ -6,7 +6,7 @@ import { Badge } from '../Badge'
 import { Pencil, Save, Lock } from 'lucide-react'
 import userService from '../../services/userService'
 
-type EditableFields = 'username' | 'bio' | 'fullname' | 'email'
+type EditableFields = 'username' | 'biography' | 'fullName' | 'email'
 
 /**
  * AccountSettings component to display and edit user account information.
@@ -15,14 +15,14 @@ type EditableFields = 'username' | 'bio' | 'fullname' | 'email'
 const AccountSettings: React.FC = () => {
   const [isEditing, setIsEditing] = useState<Record<EditableFields, boolean>>({
     username: false,
-    bio: false,
-    fullname: false,
+    biography: false,
+    fullName: false,
     email: false,
   })
   const [userInfo, setUserInfo] = useState<Record<EditableFields, string>>({
     username: '',
-    bio: '',
-    fullname: '',
+    biography: '',
+    fullName: '',
     email: '',
   })
 
@@ -32,9 +32,9 @@ const AccountSettings: React.FC = () => {
       try {
         const user = await userService.getCurrentUser()
         setUserInfo({
-          fullname: user.fullName,
+          fullName: user.fullName,
           username: user.username,
-          bio: user.biography,
+          biography: user.biography, // Corrige el nombre del campo aquí
           email: user.email,
         })
       } catch (error) {
@@ -63,6 +63,14 @@ const AccountSettings: React.FC = () => {
     try {
       await userService.updateCurrentUser({ [field]: userInfo[field] })
       setIsEditing({ ...isEditing, [field]: false })
+      // Fetch updated user info to ensure the changes are reflected
+      const updatedUser = await userService.getCurrentUser()
+      setUserInfo({
+        fullName: updatedUser.fullName,
+        username: updatedUser.username,
+        biography: updatedUser.biography, // Corrige el nombre del campo aquí
+        email: updatedUser.email,
+      })
     } catch (error) {
       console.error('Error updating user info:', error)
     }
@@ -74,7 +82,7 @@ const AccountSettings: React.FC = () => {
       <Badge text={label} color="gray" />
       <div className="mt-1 flex items-center">
         {isEditing[field] ? (
-          field === 'bio' ? (
+          field === 'biography' ? (
             <TextArea
               name={field}
               id={field}
@@ -125,10 +133,10 @@ const AccountSettings: React.FC = () => {
       <h2 className="text-2xl font-bold mb-6 text-text-tertiary">
         Account Information
       </h2>
-      {renderField('fullname', 'Full Name')}
+      {renderField('fullName', 'Full Name')}
       {renderField('username', 'Username')}
       {renderField('email', 'Email')}
-      {renderField('bio', 'Biography')}
+      {renderField('biography', 'Biography')}
     </div>
   )
 }
