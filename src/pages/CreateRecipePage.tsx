@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import RecipeForm from '../components/RecipeForm'
-import { Country, CreateRecipeRequest } from '../types/model'
-import countryService from '../services/countryService'
 import { ChefHat } from 'lucide-react'
+import { Country, CreateRecipeRequest, CreateStep } from '../types/model'
+import countryService from '../services/countryService'
+import { Button } from '../components/Button'
+import RecipeForm from '../components/RecipeForm'
+import StepsForm from '../components/Form/StepsForm'
+import recipeService from '../services/recipeService'
+import stepsService from '../services/stepsService'
+import { useNavigate } from 'react-router-dom'
 
 const CreateRecipePage: React.FC = () => {
+  const [step, setStep] = useState<'recipe' | 'steps'>('recipe')
   const [countries, setCountries] = useState<Country[]>([])
+  const [recipeData, setRecipeData] = useState<CreateRecipeRequest | null>(null)
+  const [steps, setSteps] = useState<CreateStep[]>([])
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -20,9 +30,35 @@ const CreateRecipePage: React.FC = () => {
     fetchCountries()
   }, [])
 
-  const handleSuccess = (recipe: CreateRecipeRequest) => {
-    console.log('Recipe created successfully:', recipe)
-    // TODO: Add a toast notification or redirect to the new recipe page
+  const handleRecipeFormSuccess = (recipe: CreateRecipeRequest) => {
+    setRecipeData(recipe)
+    setStep('steps')
+  }
+
+  const handleStepsFormSuccess = async (Steps: CreateStep[]) => {
+    setSteps(Steps)
+    if (!recipeData) {
+      console.error('Recipe data is missing')
+      return
+    }
+
+    try {
+      const recipe = await recipeService.createRecipe(recipeData)
+      const response = await stepsService.createSteps({
+        recipeId: recipe.id,
+        steps,
+      })
+
+      if (response) {
+        navigate(`/`)
+      }
+    } catch (error) {
+      console.error('Error creating recipe:', error)
+    }
+  }
+
+  const handleBack = () => {
+    setStep('recipe')
   }
 
   return (
@@ -35,7 +71,42 @@ const CreateRecipePage: React.FC = () => {
               Create Recipe
             </h1>
           </div>
-          <RecipeForm countries={countries} onSuccess={handleSuccess} />
+
+          <div className="flex justify-center mb-8">
+            <div className="flex items-center">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'recipe' ? 'bg-primary text-text-primary' : 'bg-bg-secondary text-text-secondary'}`}
+              >
+                1
+              </div>
+              <div
+                className={`w-16 h-1 ${step === 'recipe' ? 'bg-primary' : 'bg-bg-secondary'}`}
+              ></div>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'steps' ? 'bg-primary text-text-primary' : 'bg-bg-secondary text-text-secondary'}`}
+              >
+                2
+              </div>
+            </div>
+          </div>
+
+          {step === 'recipe' && (
+            <RecipeForm
+              countries={countries}
+              onSuccess={handleRecipeFormSuccess}
+            />
+          )}
+
+          {step === 'steps' && (
+            <>
+              <StepsForm onSuccess={handleStepsFormSuccess} />
+              <div className="mt-6 flex justify-between">
+                <Button onClick={handleBack} variant="outline">
+                  Back to Recipe Details
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

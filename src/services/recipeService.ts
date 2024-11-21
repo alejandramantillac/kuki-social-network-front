@@ -27,6 +27,8 @@ const createRecipe = async (data: CreateRecipeRequest): Promise<Recipe> => {
   formData.append('description', data.description)
   formData.append('difficulty', data.difficulty)
   formData.append('country', data.country)
+  formData.append('ingredients', JSON.stringify(data.ingredients))
+  formData.append('tags', JSON.stringify(data.tags))
   if (data.image) {
     formData.append('image', data.image)
   }

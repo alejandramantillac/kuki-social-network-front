@@ -37,7 +37,20 @@ export type Country = {
 
 export type Step = {
   id: string
+  number: number
   description: string
+  multimediaUrl: string
+}
+
+export type CreateStepRequest = {
+  recipeId: string
+  steps: CreateStep[]
+}
+
+export type CreateStep = {
+  stepNumber: number
+  description: string
+  multimedia: File | null
 }
 
 export type Comment = {
@@ -127,6 +140,8 @@ export type CreateRecipeRequest = {
   difficulty: RecipeDifficulty
   country: string
   image?: File
+  ingredients: { id: string; quantity: string }[]
+  tags: string[]
 }
 
 export type RecipeResponse = {
