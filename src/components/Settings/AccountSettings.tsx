@@ -94,12 +94,12 @@ const AccountSettings: React.FC = () => {
             />
           )
         ) : (
-          <p className="py-2 px-3 bg-gray-100 rounded-md w-full">
+          <p className="py-2 px-3 bg-bg-tertiary rounded-md w-full text-text-secondary">
             {userInfo[field]}
           </p>
         )}
         {field === 'username' || field === 'email' ? (
-          <Lock className="h-4 w-4 ml-2 text-gray-500" />
+          <Lock className="h-4 w-4 ml-2 text-text-secondary" />
         ) : (
           <Button
             onClick={() =>
@@ -110,9 +110,9 @@ const AccountSettings: React.FC = () => {
             className="ml-2"
           >
             {isEditing[field] ? (
-              <Save className="h-4 w-4" />
+              <Save className="h-4 w-4 text-text-secondary" />
             ) : (
-              <Pencil className="h-4 w-4" />
+              <Pencil className="h-4 w-4 text-text-secondary" />
             )}
           </Button>
         )}
@@ -122,7 +122,9 @@ const AccountSettings: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Account Information</h2>
+      <h2 className="text-2xl font-bold mb-6 text-text-tertiary">
+        Account Information
+      </h2>
       {renderField('fullname', 'Full Name')}
       {renderField('username', 'Username')}
       {renderField('email', 'Email')}

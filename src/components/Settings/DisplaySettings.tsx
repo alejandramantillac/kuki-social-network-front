@@ -1,34 +1,50 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Badge } from '../Badge'
 import { RadioGroup } from '@headlessui/react'
 import { Sun, Moon } from 'lucide-react'
+import { Button } from '../Button'
+import { ThemeContext } from '../../context/ThemeContext'
 
 /**
  * DisplaySettings component to manage and display theme settings.
  * @returns {JSX.Element} The rendered DisplaySettings component.
  */
 const DisplaySettings: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const { theme, setTheme } = useContext(ThemeContext)
+  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>(theme)
+
+  useEffect(() => {
+    setSelectedTheme(theme)
+  }, [theme])
 
   /**
    * Handles the theme change event.
    * @param {string} value - The selected theme value.
    */
   const handleThemeChange = (value: string) => {
-    setTheme(value as 'light' | 'dark')
+    setSelectedTheme(value as 'light' | 'dark')
+  }
+
+  /**
+   * Handles the save button click event.
+   */
+  const handleSave = () => {
+    setTheme(selectedTheme)
   }
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Display Settings</h2>
+      <h2 className="text-2xl font-bold mb-6 text-text-tertiary">
+        Display Settings
+      </h2>
       <div className="mb-6">
         <Badge
           text="Display Mode"
           color="gray"
-          className="text-sm font-medium text-gray-700 mb-2 block"
+          className="text-sm font-medium text-text-secondary mb-2 block"
         />
         <RadioGroup
-          value={theme}
+          value={selectedTheme}
           onChange={handleThemeChange}
           className="flex flex-col space-y-1"
         >
@@ -47,8 +63,7 @@ const DisplaySettings: React.FC = () => {
                   color="gray"
                   className="flex items-center cursor-pointer"
                 />
-                <Sun className="h-4 w-4 mr-2" />
-                Light Mode
+                <Sun className="h-4 w-4 mr-2 text-text-secondary" />
               </>
             )}
           </RadioGroup.Option>
@@ -67,13 +82,15 @@ const DisplaySettings: React.FC = () => {
                   color="gray"
                   className="flex items-center cursor-pointer"
                 />
-                <Moon className="h-4 w-4 mr-2" />
-                Dark Mode
+                <Moon className="h-4 w-4 mr-2 text-text-secondary" />
               </>
             )}
           </RadioGroup.Option>
         </RadioGroup>
       </div>
+      <Button onClick={handleSave} variant="primary">
+        Save
+      </Button>
     </div>
   )
 }

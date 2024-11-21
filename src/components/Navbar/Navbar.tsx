@@ -42,12 +42,18 @@ export const Navbar: React.FC<ResponsiveProps> = ({
       <div className="mt-4">
         {authContext?.isAuthenticated ? (
           <Tooltip text="Account">
-            <Avatar
-              src={authContext?.currentUser?.photoUrl}
-              alt="Avatar"
-              size="lg"
-              url={`/user/${authContext?.currentUser?.username}`}
-            />
+            <Button
+              variant="none"
+              size="sm"
+              className="p-0"
+              onClick={() => navigate('/settings')}
+            >
+              <Avatar
+                src={authContext?.currentUser?.photoUrl}
+                alt="Avatar"
+                size="lg"
+              />
+            </Button>
           </Tooltip>
         ) : (
           <Button
