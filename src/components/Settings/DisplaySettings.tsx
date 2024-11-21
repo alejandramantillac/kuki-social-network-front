@@ -10,12 +10,20 @@ import { ThemeContext } from '../../context/ThemeContext'
  * @returns {JSX.Element} The rendered DisplaySettings component.
  */
 const DisplaySettings: React.FC = () => {
-  const { theme, setTheme } = useContext(ThemeContext)
-  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>(theme)
+  const themeContext = useContext(ThemeContext)
+  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
-    setSelectedTheme(theme)
-  }, [theme])
+    if (themeContext) {
+      setSelectedTheme(themeContext.theme)
+    }
+  }, [themeContext])
+
+  if (!themeContext) {
+    return null // or handle the error appropriately
+  }
+
+  const { setTheme } = themeContext
 
   /**
    * Handles the theme change event.
