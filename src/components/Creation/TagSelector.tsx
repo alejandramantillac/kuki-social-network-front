@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Dropdown } from '../Dropdown'
 import { X } from 'lucide-react'
+import { Button } from '../Button'
 
 type TagSelectorProps = {
-  tags: string[] // Lista de nombres de tags disponibles.
-  selectedTags: string[] // Tags actualmente seleccionados.
-  onChange: (tags: string[]) => void // Función para propagar cambios al componente principal.
-  error?: string // Mensaje de error para validación.
+  tags: string[]
+  selectedTags: string[]
+  onChange: (tags: string[]) => void
+  error?: string
 }
 
 const TagSelector: React.FC<TagSelectorProps> = ({
@@ -31,36 +32,36 @@ const TagSelector: React.FC<TagSelectorProps> = ({
   }
 
   return (
-    <div>
-      <label
-        htmlFor="tags"
-        className="block text-sm font-medium text-text-secondary mb-1"
-      >
-        Tags
-      </label>
-      <Dropdown
-        title="Select Tags"
-        name="tags"
-        value={selectedTag || ''}
-        options={tags.map((tag) => ({ value: tag, label: tag }))}
-        onChange={(e) => handleTagSelect(e.target.value)}
-        className="w-full"
-      />
-      {error && <span className="text-red-500 text-sm">{error}</span>}
-      <div className="mt-2 space-y-2">
+    <div className="space-y-4">
+      <div>
+        <Dropdown
+          title="Select Tags"
+          name="tags"
+          value={selectedTag || ''}
+          options={tags.map((tag) => ({ value: tag, label: tag }))}
+          onChange={(e) => handleTagSelect(e.target.value)}
+          className="w-full"
+        />
+        {error && (
+          <span className="text-red-500 text-sm mt-1 block">{error}</span>
+        )}
+      </div>
+      <div className="space-y-2">
         {selectedTags.map((tag) => (
           <div
             key={tag}
             className="flex items-center justify-between bg-bg-secondary p-2 rounded-md"
           >
             <span className="text-text-secondary">{tag}</span>
-            <button
+            <Button
               type="button"
+              variant="secondary"
+              size="sm"
               onClick={() => handleTagRemove(tag)}
               className="text-red-500 hover:text-red-700"
             >
-              <X className="w-4 h-4" />
-            </button>
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         ))}
       </div>

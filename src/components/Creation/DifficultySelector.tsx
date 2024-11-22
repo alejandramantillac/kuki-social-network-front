@@ -1,4 +1,3 @@
-// DifficultySelector.tsx
 import React from 'react'
 
 type DifficultySelectorProps = {

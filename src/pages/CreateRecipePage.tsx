@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { ChefHat } from 'lucide-react'
-import { Country, CreateRecipeRequest, CreateStep } from '../types/model'
+import { Card } from '../components/Card'
+import { Tabs } from '../components/Tabs'
+import { CreateRecipeRequest, Country, CreateStep } from '../types/model'
 import countryService from '../services/countryService'
-import { Button } from '../components/Button'
-import RecipeForm from '../components/RecipeForm'
-import StepsForm from '../components/Form/StepsForm'
+import BasicInfoForm from '../components/Creation/BasicInfoForm'
+import FinalReview from '../components/Creation/FinalReview'
+import IngredientsForm from '../components/Creation/IngredientsForm'
+import StepsForm from '../components/Creation/StepsForm'
 import recipeService from '../services/recipeService'
 import stepsService from '../services/stepsService'
 import { useNavigate } from 'react-router-dom'
 
 const CreateRecipePage: React.FC = () => {
-  const [step, setStep] = useState<'recipe' | 'steps'>('recipe')
+  const [currentStep, setCurrentStep] = useState(0)
   const [countries, setCountries] = useState<Country[]>([])
-  const [recipeData, setRecipeData] = useState<CreateRecipeRequest | null>(null)
+  const [recipeData, setRecipeData] = useState<Partial<CreateRecipeRequest>>({})
   const [steps, setSteps] = useState<CreateStep[]>([])
-
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -24,91 +27,117 @@ const CreateRecipePage: React.FC = () => {
         setCountries(response)
       } catch (error) {
         console.error('Error fetching countries:', error)
+        setError('Failed to fetch countries. Please try again.')
       }
     }
 
     fetchCountries()
   }, [])
 
-  const handleRecipeFormSuccess = (recipe: CreateRecipeRequest) => {
-    setRecipeData(recipe)
-    setStep('steps')
+  const handleNext = () => {
+    setCurrentStep((prev) => Math.min(prev + 1, 3))
   }
 
-  const handleStepsFormSuccess = async (Steps: CreateStep[]) => {
-    setSteps(Steps)
-    if (!recipeData) {
-      console.error('Recipe data is missing')
-      return
-    }
+  const handleBasicInfoSubmit = (data: Partial<CreateRecipeRequest>) => {
+    setRecipeData((prev) => ({ ...prev, ...data }))
+    handleNext()
+  }
 
+  const handleIngredientsSubmit = (data: {
+    ingredients: { id: string; quantity: string; name: string }[]
+    tags: string[]
+  }) => {
+    setRecipeData((prev) => ({
+      ...prev,
+      ingredients: data.ingredients,
+      tags: data.tags,
+    }))
+    handleNext()
+  }
+
+  const handleStepsSubmit = (recipeSteps: CreateStep[]) => {
+    setSteps(recipeSteps)
+    handleNext()
+  }
+
+  const handleFinalSubmit = async () => {
+    setLoading(true)
+    setError(null)
     try {
-      const recipe = await recipeService.createRecipe(recipeData)
-      const response = await stepsService.createSteps({
+      const recipe = await recipeService.createRecipe(
+        recipeData as CreateRecipeRequest
+      )
+      await stepsService.createSteps({
         recipeId: recipe.id,
         steps,
       })
-
-      if (response) {
-        navigate(`/`)
-      }
+      navigate('/')
     } catch (error) {
       console.error('Error creating recipe:', error)
+      setError('Failed to create recipe. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
-  const handleBack = () => {
-    setStep('recipe')
-  }
+  const tabs = [
+    {
+      label: 'Basic Info',
+      content: (
+        <BasicInfoForm
+          onSubmit={handleBasicInfoSubmit}
+          countries={countries}
+          initialData={recipeData}
+        />
+      ),
+    },
+    {
+      label: 'Ingredients',
+      content: (
+        <IngredientsForm
+          onSubmit={handleIngredientsSubmit}
+          initialTags={recipeData.tags || []}
+          initialIngredients={recipeData.ingredients || []}
+        />
+      ),
+    },
+    {
+      label: 'Steps',
+      content: <StepsForm onSubmit={handleStepsSubmit} initialSteps={steps} />,
+    },
+    {
+      label: 'Review',
+      content: (
+        <FinalReview
+          recipeData={recipeData}
+          steps={steps}
+          onSubmit={handleFinalSubmit}
+          loading={loading}
+        />
+      ),
+    },
+  ]
 
   return (
-    <div className="min-h-screen bg-bg-secondary p-4 sm:p-6 lg:p-8">
-      <div className="max-w-4xl mx-auto bg-bg-primary rounded-lg shadow-lg overflow-hidden">
-        <div className="p-6 sm:p-8 lg:p-10">
-          <div className="flex items-center justify-center mb-6">
-            <ChefHat className="w-10 h-10 text-primary mr-2" />
-            <h1 className="text-3xl font-bold text-text-secondary">
-              Create Recipe
-            </h1>
-          </div>
+    <div className="min-h-screen bg-gradient-to-b from-bg-secondary to-bg-primary p-4 sm:p-6 lg:p-8">
+      <Card
+        title="Create Your Recipe"
+        description={`Step ${currentStep + 1} of ${tabs.length}`}
+        imageUrl="/create_recipe.jpg"
+      >
+        <div className="space-y-6">
+          <Tabs
+            tabs={tabs.map((tab, index) => ({
+              ...tab,
+              onClick: () => setCurrentStep(index),
+              disabled: index > currentStep,
+            }))}
+            activeTab={currentStep}
+          />
 
-          <div className="flex justify-center mb-8">
-            <div className="flex items-center">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'recipe' ? 'bg-primary text-text-primary' : 'bg-bg-secondary text-text-secondary'}`}
-              >
-                1
-              </div>
-              <div
-                className={`w-16 h-1 ${step === 'recipe' ? 'bg-primary' : 'bg-bg-secondary'}`}
-              ></div>
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center ${step === 'steps' ? 'bg-primary text-text-primary' : 'bg-bg-secondary text-text-secondary'}`}
-              >
-                2
-              </div>
-            </div>
-          </div>
-
-          {step === 'recipe' && (
-            <RecipeForm
-              countries={countries}
-              onSuccess={handleRecipeFormSuccess}
-            />
-          )}
-
-          {step === 'steps' && (
-            <>
-              <StepsForm onSuccess={handleStepsFormSuccess} />
-              <div className="mt-6 flex justify-between">
-                <Button onClick={handleBack} variant="outline">
-                  Back to Recipe Details
-                </Button>
-              </div>
-            </>
-          )}
+          {error && <p className="text-text-error mt-4">{error}</p>}
         </div>
-      </div>
+      </Card>
     </div>
   )
 }

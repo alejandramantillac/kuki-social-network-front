@@ -140,7 +140,7 @@ export type CreateRecipeRequest = {
   difficulty: RecipeDifficulty
   country: string
   image?: File
-  ingredients: { id: string; quantity: string }[]
+  ingredients: { id: string; quantity: string; name: string }[]
   tags: string[]
 }
 

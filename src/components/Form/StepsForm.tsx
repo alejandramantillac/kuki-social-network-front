@@ -6,19 +6,20 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd'
-import { Button } from '../Button'
 import { CreateStep } from '../../types/model'
+import { Button } from '../Button'
 import NewStep from '../Creation/NewStep'
-
+import { Spinner } from '../Spinner'
 interface StepsFormProps {
   onSuccess: (steps: CreateStep[]) => void
+  loading?: boolean
 }
 
-const StepsForm: React.FC<StepsFormProps> = ({ onSuccess }) => {
+const StepsForm: React.FC<StepsFormProps> = ({ onSuccess, loading }) => {
   const [steps, setSteps] = useState<CreateStep[]>([
     { stepNumber: 1, description: '', multimedia: null },
   ])
-  const [errors, setErrors] = useState<string[]>([]) // Errores por paso
+  const [errors, setErrors] = useState<string[]>([])
 
   const addStep = () => {
     setSteps([
@@ -29,7 +30,7 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSuccess }) => {
         multimedia: null,
       },
     ])
-    setErrors([...errors, '']) // Añadir espacio para error del nuevo paso
+    setErrors([...errors, ''])
   }
 
   const removeStep = (index: number) => {
@@ -44,7 +45,6 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSuccess }) => {
     newSteps[index].description = description
     setSteps(newSteps)
 
-    // Limpiar error si se añadió descripción
     if (description) {
       const newErrors = [...errors]
       newErrors[index] = ''
@@ -57,7 +57,6 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSuccess }) => {
     newSteps[index].multimedia = file
     setSteps(newSteps)
 
-    // Limpiar error si se añadió multimedia
     if (file) {
       const newErrors = [...errors]
       newErrors[index] = ''
@@ -95,7 +94,7 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSuccess }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-6">
       <h2 className="text-2xl font-semibold text-text-secondary mb-4">
         Recipe Steps
       </h2>
@@ -135,11 +134,12 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSuccess }) => {
           )}
         </Droppable>
       </DragDropContext>
-      <Button type="button" onClick={addStep} className="mb-4">
+      <Button type="button" onClick={addStep} className="w-full">
         <Plus className="w-4 h-4 mr-2" /> Add Step
       </Button>
-      <Button type="submit" className="w-full">
-        Save Recipe
+      <Button type="submit" className="w-full" disabled={loading}>
+        {loading ? <Spinner /> : null}
+        {loading ? 'Saving Recipe...' : 'Save Recipe'}
       </Button>
     </form>
   )

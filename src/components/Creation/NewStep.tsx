@@ -1,9 +1,9 @@
-import React from 'react'
-import { GripVertical, Trash2, ImageIcon } from 'lucide-react'
-import { Input, Textarea } from '@headlessui/react'
-import { Button } from '../Button'
-import { CreateStep } from '../../types/model'
+import React, { useState } from 'react'
+import { GripVertical, Trash2, ImageIcon, X } from 'lucide-react'
 import { DraggableProvided } from 'react-beautiful-dnd'
+import { Textarea } from '@headlessui/react'
+import { CreateStep } from '../../types/model'
+import { Button } from '../Button'
 
 interface NewStepProps {
   step: CreateStep
@@ -23,15 +23,36 @@ const NewStep: React.FC<NewStepProps> = ({
   onUpdateMultimedia,
   provided,
 }) => {
+  const [preview, setPreview] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setLoading(true)
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result as string)
+        setLoading(false)
+      }
+      reader.readAsDataURL(file)
+      onUpdateMultimedia(file)
+    } else {
+      setPreview(null)
+      onUpdateMultimedia(null)
+    }
+  }
+
+  const handleRemoveMedia = () => {
+    setPreview(null)
+    onUpdateMultimedia(null)
+  }
+
   return (
     <div
       ref={provided.innerRef}
       {...provided.draggableProps}
       className="relative p-4 bg-bg-secondary rounded-lg"
-      style={{
-        ...provided.draggableProps.style,
-        position: 'relative',
-      }}
     >
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center">
@@ -53,25 +74,40 @@ const NewStep: React.FC<NewStepProps> = ({
         className={`w-full mb-2 ${error ? 'border-red-500' : ''}`}
         rows={3}
       />
-      <div className="flex items-center">
-        <Input
-          type="file"
-          accept="image/*,video/*"
-          onChange={(e) => onUpdateMultimedia(e.target.files?.[0] || null)}
-          className="hidden"
-          id={`file-${step.stepNumber}`}
-        />
+      <div className="flex items-center space-x-2">
         <label
           htmlFor={`file-${step.stepNumber}`}
-          className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 cursor-pointer"
+          className="flex items-center justify-center w-24 h-24 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors"
         >
-          <ImageIcon className="w-5 h-5 mr-2" />
-          {step.multimedia ? 'Change' : 'Add'} Media
+          {loading ? (
+            <div className="animate-pulse">Loading...</div>
+          ) : preview ? (
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          ) : (
+            <ImageIcon className="w-8 h-8 text-text-secondary" />
+          )}
+          <input
+            type="file"
+            id={`file-${step.stepNumber}`}
+            accept="image/*,video/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
         </label>
-        {step.multimedia && (
-          <span className="ml-2 text-sm text-text-secondary">
-            {step.multimedia.name}
-          </span>
+        {preview && (
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={handleRemoveMedia}
+          >
+            <X className="w-4 h-4 mr-2" />
+            Remove
+          </Button>
         )}
       </div>
       {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
