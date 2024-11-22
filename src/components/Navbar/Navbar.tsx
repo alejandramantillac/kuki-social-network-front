@@ -129,7 +129,12 @@ export const Navbar: React.FC<ResponsiveProps> = ({
       {/* Compose Button */}
       <div className="mt-auto">
         <Tooltip text="Post">
-          <Button variant="primary" size="lg" className="p-4">
+          <Button
+            variant="primary"
+            size="lg"
+            className="p-4"
+            onClick={() => navigate('/create-recipe')}
+          >
             <EditIcon className="h-5 w-5" />
           </Button>
         </Tooltip>

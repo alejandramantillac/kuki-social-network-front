@@ -13,6 +13,7 @@ export const Input: React.FC<InputProps> = ({
   label,
   icon,
   className,
+  register,
   errors,
   ...props
 }) => {
@@ -37,6 +38,7 @@ export const Input: React.FC<InputProps> = ({
             icon ? 'pl-10' : ''
           } ${className} ${errors ? 'border-text-error' : 'border-text-primary-hover'} dark:bg-bg-primary dark:text-text-primary`}
           {...props}
+          {...register}
         />
       </div>
       {errors && <p className="text-sm text-text-error">{errors}</p>}

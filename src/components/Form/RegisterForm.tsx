@@ -2,7 +2,6 @@ import React, { useState, useEffect, JSX } from 'react'
 import Form from './Form'
 import { Input } from '../Input'
 import auth from '../../services/authService'
-import { useNavigate } from 'react-router-dom'
 import country from '../../services/countryService'
 import { Dropdown } from '../Dropdown'
 
@@ -13,8 +12,6 @@ import { Dropdown } from '../Dropdown'
  * <RegisterForm />
  */
 const RegisterForm: React.FC = (): JSX.Element => {
-  const navigate = useNavigate()
-
   const initialValues = {
     username: '',
     email: '',
@@ -68,7 +65,7 @@ const RegisterForm: React.FC = (): JSX.Element => {
           country: string
         }
       )
-      if (user) navigate('/')
+      if (user) window.location.href = '/'
       else console.log('Registration failed')
     } catch (error) {
       console.error('An error occurred while submitting the form:', error)

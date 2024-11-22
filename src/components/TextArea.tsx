@@ -13,6 +13,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   label,
   icon,
   className,
+  register,
   errors,
   ...props
 }) => {
@@ -37,6 +38,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
             icon ? 'pl-10' : ''
           } ${className} ${errors ? 'border-text-error' : 'border-text-primary-hover'}`}
           {...props}
+          {...register}
         />
       </div>
       {errors && <p className="text-sm text-text-error">{errors}</p>}

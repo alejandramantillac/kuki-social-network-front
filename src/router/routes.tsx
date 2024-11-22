@@ -11,6 +11,7 @@ import ContentWithSidebar from '../components/Layout/ContentWithSidebar'
 import Root from '../components/Root'
 import NotFoundPage from '../pages/NotFoundPage'
 import SettingsPage from '../pages/SettingsPage'
+import CreateRecipePage from '../pages/CreateRecipePage'
 
 const routes = createRoutesFromElements(
   <Route path="/">
@@ -18,6 +19,7 @@ const routes = createRoutesFromElements(
     <Route path="/register" element={<Register />} />
     <Route element={<Root />}>
       <Route path="/settings" element={<SettingsPage />} />
+      <Route path="/create-recipe" element={<CreateRecipePage />} />
       <Route path="/" element={<ContentWithSidebar />}>
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/" element={<Feed />} />

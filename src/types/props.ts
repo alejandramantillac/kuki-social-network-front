@@ -2,6 +2,7 @@ import React from 'react'
 import { PostFilter } from './filter'
 import { Tag } from './model'
 import { AuthUser } from './model'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
 export type AvatarProps = {
   src?: string
@@ -42,6 +43,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string
   icon?: React.ReactNode
   errors?: string
+  register?: UseFormRegisterReturn<'title'>
 }
 
 export type ModalProps = {
@@ -128,10 +130,13 @@ export type SpinnerProps = {
 export type TabProps = {
   label: string
   content: React.ReactNode
+  disabled?: boolean
+  onClick?: () => void
 }
 
 export type TabsProps = {
   tabs: TabProps[]
+  activeTab: number
 }
 
 export type FormProps = {
@@ -181,4 +186,5 @@ export type TextAreaProps =
     label?: string
     icon?: React.ReactNode
     errors?: string
+    register?: UseFormRegisterReturn<'description'>
   }
