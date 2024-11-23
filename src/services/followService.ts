@@ -65,9 +65,52 @@ const getFollowers = async (
   return response.data
 }
 
+const getFollowingUsersCount = async (username: string): Promise<number> => {
+  const response = await axiosInstance.get<number>(
+    `${API_PATH}/followers/count`,
+    {
+      params: {
+        username,
+      },
+    }
+  )
+  return response.data
+}
+
+const getFollowedUsersCount = async (username: string): Promise<number> => {
+  const response = await axiosInstance.get<number>(
+    `${API_PATH}/following/count`,
+    {
+      params: {
+        username,
+      },
+    }
+  )
+  return response.data
+}
+
+const isFollowing = async (
+  username: string,
+  followedUsername: string
+): Promise<boolean> => {
+  const response = await axiosInstance.get<boolean>(
+    `${API_PATH}/is-following`,
+    {
+      params: {
+        username,
+        followedUsername,
+      },
+    }
+  )
+  return response.data
+}
+
 export default {
   followUser,
   unfollowUser,
   getFollowedUsers,
   getFollowers,
+  getFollowingUsersCount,
+  getFollowedUsersCount,
+  isFollowing,
 }

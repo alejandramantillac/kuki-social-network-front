@@ -6,7 +6,7 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 export type AvatarProps = {
   src?: string
   alt: string
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
   url?: string
 }
 
@@ -37,6 +37,11 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'outline' | 'none'
   size?: 'sm' | 'md' | 'lg'
 }
+
+export type FollowButtonProps =
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    followed: boolean
+  }
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string

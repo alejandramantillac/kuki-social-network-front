@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  Navigate,
 } from 'react-router-dom'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
@@ -12,7 +13,9 @@ import Root from '../components/Root'
 import NotFoundPage from '../pages/NotFoundPage'
 import SettingsPage from '../pages/SettingsPage'
 import CreateRecipePage from '../pages/CreateRecipePage'
+import ProfilePage from '../pages/ProfilePage'
 import RequireAuth from '../components/RequireAuth'
+
 
 const routes = createRoutesFromElements(
   <Route path="/">
@@ -31,6 +34,8 @@ const routes = createRoutesFromElements(
         </Route>
         <Route path="/" element={<Feed />} />
       </Route>
+      <Route path="/profile" element={<Navigate to="/profile/me" replace />} />
+      <Route path="/profile/:username" element={<ProfilePage />} />
     </Route>
     <Route path="*" element={<NotFoundPage />} />{' '}
   </Route>
