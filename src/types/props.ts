@@ -1,7 +1,6 @@
 import React from 'react'
 import { PostFilter } from './filter'
-import { Tag } from './model'
-import { AuthUser } from './model'
+import { PublicUser, Tag } from './model'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 export type AvatarProps = {
@@ -178,7 +177,7 @@ export type TagListProps = {
 }
 
 export type FollowListProps = {
-  users: AuthUser[]
+  users: PublicUser[]
 }
 
 export type TextAreaProps =

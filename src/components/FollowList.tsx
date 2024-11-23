@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { FollowListProps } from '../types/props'
 import { Avatar } from './Avatar'
 import { Button } from './Button'
 import { ChefHat, Users } from 'lucide-react'
+import followService from '../services/followService'
+import { AuthContext } from '../context/AuthContext'
 
 /**
  * FollowList component to display a list of users to follow in a recipe-themed social network.
@@ -11,6 +13,24 @@ import { ChefHat, Users } from 'lucide-react'
  * @returns {JSX.Element} The rendered FollowList component.
  */
 const FollowList: React.FC<FollowListProps> = ({ users }) => {
+  const authContext = useContext(AuthContext)
+  const [userList, setUserList] = useState(users)
+
+  const handleFollowToggle = async (username: string, followed: boolean) => {
+    if (authContext?.isAuthenticated) {
+      if (!followed) {
+        await followService.followUser(username)
+      } else {
+        await followService.unfollowUser(username)
+      }
+      setUserList((prevUserList) =>
+        prevUserList.map((user) =>
+          user.username === username ? { ...user, followed: !followed } : user
+        )
+      )
+    }
+  }
+
   return (
     <div className="bg-bg-primary p-4 sm:p-6 rounded-lg shadow-lg w-full">
       <div className="flex items-center gap-2 mb-4 sm:mb-6">
@@ -21,9 +41,9 @@ const FollowList: React.FC<FollowListProps> = ({ users }) => {
       </div>
 
       <div className="space-y-4">
-        {users.slice(0, 3).map((user) => (
+        {userList.slice(0, 3).map((user) => (
           <div
-            key={user.id}
+            key={user.username}
             className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary-hover transition-colors duration-200"
           >
             <div className="flex items-center gap-3">
@@ -41,8 +61,9 @@ const FollowList: React.FC<FollowListProps> = ({ users }) => {
               variant="outline"
               className="border-primary text-primary hover:bg-secondary-hover hover:text-primary-hover transition-colors duration-200 text-xs sm:text-sm"
               size="sm"
+              onClick={() => handleFollowToggle(user.username, user.followed)}
             >
-              Follow
+              {user.followed ? 'Unfollow' : 'Follow'}
             </Button>
           </div>
         ))}
