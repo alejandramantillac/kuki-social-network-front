@@ -47,10 +47,14 @@ const PostList: React.FC<PostListProps> = ({ filters = undefined }) => {
     }
   }, [handleScroll])
 
+  const handleDeletePost = (postId: string) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId))
+  }
+
   return (
     <div className="post-list">
       {posts.map((post) => (
-        <PostItem key={post.id} post={post} />
+        <PostItem key={post.id} post={post} onDelete={handleDeletePost} />
       ))}
       {loading && <Spinner />}
       {!hasMore && <NoMoreContent />}

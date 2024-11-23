@@ -49,7 +49,9 @@ const getUsername = (decodedToken: DecodedToken): string => {
 }
 
 const getRoles = (decodedToken: DecodedToken): string[] => {
-  return decodedToken ? decodedToken.roles : []
+  return decodedToken
+    ? decodedToken.authorities.map((auth) => auth.authority)
+    : []
 }
 
 const getPhotoUrl = (decodedToken: DecodedToken): string => {
