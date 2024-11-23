@@ -14,16 +14,24 @@ import NotFoundPage from '../pages/NotFoundPage'
 import SettingsPage from '../pages/SettingsPage'
 import CreateRecipePage from '../pages/CreateRecipePage'
 import ProfilePage from '../pages/ProfilePage'
+import RequireAuth from '../components/RequireAuth'
+
 
 const routes = createRoutesFromElements(
   <Route path="/">
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
     <Route element={<Root />}>
-      <Route path="/settings" element={<SettingsPage />} />
-      <Route path="/create-recipe" element={<CreateRecipePage />} />
+      <Route element={<RequireAuth />}>
+        <Route path="/settings" element={<SettingsPage />} />
+      </Route>
+      <Route element={<RequireAuth />}>
+        <Route path="/create-recipe" element={<CreateRecipePage />} />
+      </Route>
       <Route path="/" element={<ContentWithSidebar />}>
-        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/notifications" element={<NotificationsPage />} />
+        </Route>
         <Route path="/" element={<Feed />} />
       </Route>
       <Route path="/profile" element={<Navigate to="/profile/me" replace />} />

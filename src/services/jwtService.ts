@@ -13,8 +13,9 @@ type DecodedToken = {
 const TOKEN_KEY = 'jwtToken'
 
 const getValidToken = (): string | null => {
-  if (isTokenExpired()) {
+  if (isTokenExpired() && getDecodedToken()) {
     removeToken()
+    window.location.reload()
   }
   return getToken()
 }

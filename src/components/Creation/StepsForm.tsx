@@ -5,6 +5,7 @@ import { Button } from '../Button'
 import { TextArea } from '../TextArea'
 import ImageUploader from './ImageUploader'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Input } from '../Input'
 
 interface StepsFormProps {
   onSubmit: (steps: CreateStep[]) => void
@@ -15,7 +16,7 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSubmit, initialSteps }) => {
   const [steps, setSteps] = useState<CreateStep[]>(
     initialSteps.length > 0
       ? initialSteps
-      : [{ stepNumber: 1, description: '', multimedia: null }]
+      : [{ stepNumber: 1, description: '', multimedia: null, estimatedTime: 0 }]
   )
   const dragItem = useRef<number | null>(null)
   const dragOverItem = useRef<number | null>(null)
@@ -23,14 +24,19 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSubmit, initialSteps }) => {
   const addStep = () => {
     setSteps([
       ...steps,
-      { stepNumber: steps.length + 1, description: '', multimedia: null },
+      {
+        stepNumber: steps.length + 1,
+        description: '',
+        multimedia: null,
+        estimatedTime: 0,
+      },
     ])
   }
 
   const updateStep = (
     index: number,
     field: keyof CreateStep,
-    value: string | File | null
+    value: string | File | null | number
   ) => {
     const updatedSteps = [...steps]
     updatedSteps[index] = { ...updatedSteps[index], [field]: value }
@@ -74,7 +80,7 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSubmit, initialSteps }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 mt-3">
       <AnimatePresence>
         {steps.map((step, index) => (
           <motion.div
@@ -90,13 +96,27 @@ const StepsForm: React.FC<StepsFormProps> = ({ onSubmit, initialSteps }) => {
             onDragOver={(e) => e.preventDefault()}
             className="bg-bg-secondary p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
           >
-            <div className="flex items-center mb-4">
-              <div className="mr-4 cursor-move p-2 hover:bg-bg-primary rounded transition-colors duration-200">
-                <GripVertical className="h-6 w-6 text-text-secondary" />
+            <div className="flex items-center mb-4 w-full justify-between">
+              <div className="flex items-center">
+                <div className="mr-4 cursor-move p-2 hover:bg-bg-primary rounded transition-colors duration-200">
+                  <GripVertical className="h-6 w-6 text-text-secondary" />
+                </div>
+                <h3 className="text-xl font-semibold text-text-tertiary">
+                  Step {step.stepNumber}
+                </h3>
+                <Input
+                  type="number"
+                  id={`time-${step.stepNumber}`}
+                  value={step.estimatedTime || ''}
+                  onChange={(e) =>
+                    updateStep(index, 'estimatedTime', e.target.value)
+                  }
+                  min="0"
+                  className="w-24 ml-3 block rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                  placeholder="Enter time in minutes"
+                />
               </div>
-              <h3 className="text-xl font-semibold text-text-tertiary flex-grow">
-                Step {step.stepNumber}
-              </h3>
+
               <Button
                 type="button"
                 variant="secondary"

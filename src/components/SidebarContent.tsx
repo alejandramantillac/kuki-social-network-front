@@ -3,8 +3,7 @@ import { SearchBar } from './SearchBar'
 import TagList from './TagList'
 import FollowList from './FollowList'
 import tagService from '../services/tagService'
-import userService from '../services/userService'
-import { Tag, AuthUser } from '../types/model'
+import { Tag } from '../types/model'
 
 /**
  * SidebarContent component to display a search bar, a list of trending tags, and a list of users to follow.
@@ -17,7 +16,6 @@ import { Tag, AuthUser } from '../types/model'
 const SidebarContent: React.FC = () => {
   const [searchValue, setSearchValue] = useState('')
   const [tags, setTags] = useState<Tag[]>([])
-  const [users, setUsers] = useState<AuthUser[]>([])
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -31,18 +29,7 @@ const SidebarContent: React.FC = () => {
       }
     }
 
-    const fetchUsers = async () => {
-      try {
-        const usersData = await userService.getAllUsers()
-        setUsers(usersData)
-      } catch (error) {
-        console.error('Error fetching users:', error)
-        setError('Failed to fetch users. Please try again later.')
-      }
-    }
-
     fetchTags()
-    fetchUsers()
   }, [])
 
   return (
@@ -57,12 +44,12 @@ const SidebarContent: React.FC = () => {
       <div className="md:hidden">
         <TagList tags={tags} />
         <div className="my-4"></div>
-        <FollowList users={users} />
+        <FollowList />
       </div>
       <div className="hidden md:block">
         <TagList tags={tags} />
         <div className="my-4"></div>
-        <FollowList users={users} />
+        <FollowList />
       </div>
     </div>
   )

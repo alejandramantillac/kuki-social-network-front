@@ -22,7 +22,7 @@ export const Card: React.FC<CardProps> = ({
         <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
       )}
       <div className="p-4">
-        <h3 className="text-lg font-bold">{title}</h3>
+        <h3 className="text-lg font-bold text-text-tertiary">{title}</h3>
         <p className="text-text-secondary">{description}</p>
         {children}
       </div>

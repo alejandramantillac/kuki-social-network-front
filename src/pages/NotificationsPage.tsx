@@ -13,7 +13,9 @@ import Notifications from '../components/Notifications/Notifications'
 const NotificationsPage: React.FC = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Notificaciones</h1>
+      <h1 className="text-2xl font-bold mb-4 dark:text-text-primary">
+        Notificaciones
+      </h1>
       <div className="flex-grow">
         <Notifications />
       </div>

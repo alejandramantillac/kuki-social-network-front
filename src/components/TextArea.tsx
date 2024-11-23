@@ -34,7 +34,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
           </div>
         )}
         <textarea
-          className={`w-full rounded-md border px-3 py-2 placeholder-text-secondary shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
+          className={`w-full rounded-md border px-3 py-2 placeholder-text-secondary shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary bg-bg-secondary dark:text-text-primary dark:border-bg-primary ${
             icon ? 'pl-10' : ''
           } ${className} ${errors ? 'border-text-error' : 'border-text-primary-hover'}`}
           {...props}
