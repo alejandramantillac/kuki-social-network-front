@@ -44,6 +44,7 @@ const login = async (
 
 const logout = (): void => {
   jwtService.removeToken()
+  window.location.reload()
 }
 
 const getUser = (): AuthUser | null => {
