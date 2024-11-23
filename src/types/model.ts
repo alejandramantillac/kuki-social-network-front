@@ -10,6 +10,12 @@ export interface Pageable<T> {
   empty: boolean
 }
 
+export type UserFollowResponse = {
+  followerUsername: string
+  followedUsername: string
+  creationDate: string
+}
+
 export type Recipe = {
   id: string
   title: string
@@ -51,6 +57,7 @@ export type CreateStep = {
   stepNumber: number
   description: string
   multimedia: File | null
+  estimatedTime: number
 }
 
 export type Comment = {
@@ -108,11 +115,14 @@ export type User = {
   comments: Comment[]
   likes: Recipe[]
   savedRecipes: Recipe[]
+  followed: boolean
 }
 
 export type PublicUser = {
   username: string
+  name: string
   photoUrl: string
+  followed: boolean
 }
 
 export type Like = {

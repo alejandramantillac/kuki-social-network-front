@@ -59,10 +59,16 @@ const deleteProfilePicture = async (): Promise<void> => {
   await axiosInstance.delete(`${API_PATH}/profile-picture`)
 }
 
+const getUserByUserName = async (userName: string): Promise<User> => {
+  const response = await axiosInstance.get<User>(`${API_PATH}/${userName}`)
+  return response.data
+}
+
 export default {
   getAllUsers,
   getCurrentUser,
   updateCurrentUser,
   uploadProfilePicture,
   deleteProfilePicture,
+  getUserByUserName,
 }
