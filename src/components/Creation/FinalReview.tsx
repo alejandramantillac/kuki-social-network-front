@@ -73,7 +73,7 @@ const FinalReview: React.FC<FinalReviewProps> = ({
         <ol className="list-decimal pl-5 space-y-4">
           {steps.map((step, index) => (
             <li key={index} className="text-sm text-text-secondary">
-              <p>{step.description}</p>
+              <p>{`${step.description} - ${step.estimatedTime} minutes`}</p>
               {step.multimedia && (
                 <img
                   src={URL.createObjectURL(step.multimedia)}

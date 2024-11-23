@@ -144,16 +144,18 @@ const IngredientsForm: React.FC<IngredientsFormProps> = ({
                   onChange={(e) =>
                     updateIngredient(index, 'id', e.target.value)
                   }
-                  className="flex-grow"
+                  className="flex-grow w-full"
                 />
                 <Input
-                  type="text"
+                  type="number"
                   value={ingredient.quantity}
                   onChange={(e) =>
                     updateIngredient(index, 'quantity', e.target.value)
                   }
                   placeholder="Quantity"
-                  className="w-24"
+                  className="w-20 mb-2"
+                  min="0"
+                  step="1"
                 />
                 <Button
                   type="button"

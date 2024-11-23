@@ -51,6 +51,7 @@ export type CreateStep = {
   stepNumber: number
   description: string
   multimedia: File | null
+  estimatedTime: number
 }
 
 export type Comment = {
