@@ -1,5 +1,7 @@
 import React from 'react'
 import { Recipe, RecipeDifficulty } from '../../types/model'
+import { formatDuration } from '../../utils/timeUtils'
+import { Clock, Globe } from 'lucide-react'
 
 const RecipeInformation: React.FC<{
   recipe: Recipe | null
@@ -19,16 +21,32 @@ const RecipeInformation: React.FC<{
 
   return (
     <div className="py-4">
-      <h1 className="text-2xl font-bold text-text-primary">{recipe?.title}</h1>
       {recipe && (
         <>
-          <span
-            className={`absolute top-4 left-4 text-sm bg-tertiary px-2 py-1 rounded-full ${getColor(recipe.difficulty) || 'BASIC'}`}
-          >
-            {recipe.difficulty}
-          </span>
-          <p className="text-text-secondary">{recipe.estimatedTime}</p>
-          <p className="text-text-secondary">{recipe.description}</p>
+          <div className="">
+            <h1 className="text-4xl font-bold mb-5 font-size-21">
+              {recipe.title}
+            </h1>
+            <span
+              className={`absolute top-4 left-4 text-sm bg-tertiary px-2 py-1 rounded-full ${getColor(recipe.difficulty) || 'BASIC'}`}
+            >
+              {recipe.difficulty}
+            </span>
+            <div className="flex items-center mb-4">
+              <Clock className="w-4 h-4 mr-1" />
+              <span className="mr-4">
+                {formatDuration(recipe.estimatedTime!)}
+              </span>
+            </div>
+            <div className="flex items-center mb-4">
+              <Globe className="w-4 h-4 mr-1" />
+              <span>{recipe.country.name}</span>
+            </div>
+            <p>
+              <b>Description:</b> <br />
+              {recipe.description}
+            </p>
+          </div>
         </>
       )}
     </div>

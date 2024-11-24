@@ -15,6 +15,7 @@ import SettingsPage from '../pages/SettingsPage'
 import CreateRecipePage from '../pages/CreateRecipePage'
 import ProfilePage from '../pages/ProfilePage'
 import RequireAuth from '../components/RequireAuth'
+import ViewRecipePage from '../pages/ViewRecipePage'
 
 const routes = createRoutesFromElements(
   <Route path="/">
@@ -32,11 +33,12 @@ const routes = createRoutesFromElements(
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
         <Route path="/" element={<Feed />} />
+        <Route path="/view-recipe/:id" element={<ViewRecipePage />} />
       </Route>
       <Route path="/profile" element={<Navigate to="/profile/me" replace />} />
       <Route path="/profile/:username" element={<ProfilePage />} />
     </Route>
-    <Route path="*" element={<NotFoundPage />} />{' '}
+    <Route path="*" element={<NotFoundPage />} />
   </Route>
 )
 

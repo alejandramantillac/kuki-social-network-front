@@ -1,21 +1,37 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import RecipeBody from '../components/Recipe/RecipeBody'
 import recipeService from '../services/recipeService'
 import { Recipe } from '../types/model'
 import { Spinner } from '../components/Spinner'
+import { StepModal } from '../components/StepModal/StepModal'
+import { Button } from '../components/Button'
 
-const ViewRecipePage: React.FC<{
-  id: string
-}> = ({ id }) => {
+/**
+ * ViewRecipePage component to display the recipe page.
+ * This component renders the RecipeBody component with the recipe data.
+ *
+ * @returns {JSX.Element} The rendered ViewRecipePage component.
+ *
+ * @example
+ * <ViewRecipePage />
+ */
+const ViewRecipePage: React.FC = () => {
+  const { id } = useParams<{ id: string }>()
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     try {
       const fetchRecipe = async () => {
-        const recipe = await recipeService.getRecipe(id)
-        setRecipe(recipe)
+        if (id) {
+          const recipe = await recipeService.getRecipe(id)
+          setRecipe(recipe)
+        } else {
+          console.error('Recipe ID is undefined')
+        }
       }
       fetchRecipe()
     } catch (error) {
@@ -32,7 +48,22 @@ const ViewRecipePage: React.FC<{
           <Spinner size="md" />
         </div>
       ) : (
-        <RecipeBody recipe={recipe} />
+        <>
+          <div className="flex flex-col">
+            <RecipeBody recipe={recipe} />
+            <Button className="max-w-48 h-11" onClick={() => setIsOpen(true)}>
+              View Steps
+            </Button>
+          </div>
+
+          {id && (
+            <StepModal
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+              id={id}
+            />
+          )}
+        </>
       )}
     </div>
   )

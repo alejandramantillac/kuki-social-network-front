@@ -10,7 +10,7 @@ const RecipeImage: React.FC<{ src: string }> = ({ src }) => {
       <img
         src={imgSrc}
         alt="Recipe"
-        className="w-full h-64 object-cover"
+        className="w-full h-80 object-cover"
         onError={() => setImgSrc(defaultImage)}
       />
     </div>

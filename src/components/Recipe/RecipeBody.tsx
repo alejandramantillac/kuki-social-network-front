@@ -7,7 +7,7 @@ const RecipeBody: React.FC<{
   recipe: Recipe | null
 }> = ({ recipe }) => {
   return (
-    <div className="grid grid cols-1 md:grid-cols-3 shadow-lg rounded-lg overflow-hidden">
+    <div className="">
       <RecipeImage src={recipe?.photoUrl || ''} />
       <RecipeInformation recipe={recipe} />
     </div>
