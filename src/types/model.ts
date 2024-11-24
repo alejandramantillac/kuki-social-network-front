@@ -46,6 +46,7 @@ export type Step = {
   number: number
   description: string
   multimediaUrl: string
+  estimatedTime?: string
 }
 
 export type CreateStepRequest = {
