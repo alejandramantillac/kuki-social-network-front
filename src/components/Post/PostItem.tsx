@@ -7,8 +7,13 @@ import PostFooter from './PostFooter'
 import { Clock, Globe } from 'lucide-react'
 import PostTags from './PostTags'
 import { formatDuration } from '../../utils/timeUtils'
+import { Button } from '../Button'
+import { Outlet } from 'react-router-dom'
+import { StepModal } from '../StepModal/StepModal'
 
 const PostItem: React.FC<{ post: Recipe }> = ({ post }) => {
+  const [isOpen, setIsOpen] = React.useState(false)
+
   return (
     <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg">
       <PostImage
@@ -30,6 +35,16 @@ const PostItem: React.FC<{ post: Recipe }> = ({ post }) => {
           <Globe className="w-4 h-4 mr-1" />
           <span>{post.country.name}</span>
         </div>
+
+        <Button variant="primary" size="md" onClick={() => setIsOpen(true)}>
+          View Steps
+        </Button>
+        <Outlet />
+        <StepModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          id={post.id}
+        />
         <PostFooter
           likes={post.likes}
           comments={post.comments}
