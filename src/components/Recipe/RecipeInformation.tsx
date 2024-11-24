@@ -24,14 +24,16 @@ const RecipeInformation: React.FC<{
       {recipe && (
         <>
           <div className="">
-            <h1 className="text-4xl font-bold mb-5 font-size-21">
-              {recipe.title}
-            </h1>
-            <span
-              className={`absolute top-4 left-4 text-sm bg-tertiary px-2 py-1 rounded-full ${getColor(recipe.difficulty) || 'BASIC'}`}
-            >
-              {recipe.difficulty}
-            </span>
+            <div className="flex items-center mb-5">
+              <h1 className="text-4xl font-bold font-size-21 mr-4">
+                {recipe.title}
+              </h1>
+              <span
+                className={`text-sm bg-tertiary px-2 py-1 rounded-full ${getColor(recipe.difficulty) || 'BASIC'} shadow-md`}
+              >
+                {recipe.difficulty}
+              </span>
+            </div>
             <div className="flex items-center mb-4">
               <Clock className="w-4 h-4 mr-1" />
               <span className="mr-4">
