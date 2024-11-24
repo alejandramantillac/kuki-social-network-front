@@ -14,15 +14,9 @@ type StepResponse = {
  * const steps = await getSteps();
  */
 const getSteps = async (id: string): Promise<Step[]> => {
-  const response = await axiosInstance.post<StepResponse>(API_PATH, {
-    recipeId: id,
-    request: {
-      page: 0,
-      size: 10,
-      direction: 'ASC',
-      orderBy: 'number',
-    },
-  })
+  const response = await axiosInstance.get<StepResponse>(
+    API_PATH + `?recipeId=${id}&page=0&size=10`
+  )
   console.log('API response:', response.data) // Verify the API response
   return response.data.content
 }

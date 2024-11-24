@@ -22,6 +22,7 @@ export const StepModal: React.FC<StepModalProps> = ({
     const fetchStep = async () => {
       try {
         const data = await stepService.getSteps(id)
+        data.sort((a, b) => a.number - b.number)
         if (Array.isArray(data)) {
           setStep(data)
         } else {

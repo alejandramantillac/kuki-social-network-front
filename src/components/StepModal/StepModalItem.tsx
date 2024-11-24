@@ -1,6 +1,8 @@
 import React from 'react'
 import { Step } from '../../types/model'
+import { formatDuration } from '../../utils/timeUtils'
 import { Card } from '../Card'
+import { Clock } from 'lucide-react'
 
 /**
  * StepModalItem component to display a single step.
@@ -15,9 +17,13 @@ import { Card } from '../Card'
 const StepModalItem: React.FC<{ step: Step }> = ({ step }) => {
   return (
     <Card title={`Step # ${step.number}`} description="">
-      <h2></h2>
       <img src={step.multimediaUrl} alt={`Step ${step.number}`} />
-      <p className="text-lg font-semibold">{step.description}</p>
+      <div className="flex items-center text-sm text-text-secondary mb-4">
+        <Clock className="w-4 h-4 mr-1" />
+        <span className="mr-4">{formatDuration(step.estimatedTime!)}</span>
+      </div>
+      <h3 className="text-lg font-semibold">Description</h3>
+      <p className="text-lg">{step.description}</p>
     </Card>
   )
 }
