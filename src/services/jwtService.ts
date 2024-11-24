@@ -8,6 +8,7 @@ type DecodedToken = {
   exp: number
   photoUrl: string
   avatarUrl: string
+  authorities: { authority: string }[]
 }
 
 const TOKEN_KEY = 'jwtToken'
@@ -50,7 +51,9 @@ const getUsername = (decodedToken: DecodedToken): string => {
 
 const getRoles = (decodedToken: DecodedToken): string[] => {
   return decodedToken
-    ? decodedToken.authorities.map((auth) => auth.authority)
+    ? decodedToken.authorities.map(
+        (auth: { authority: string }) => auth.authority
+      )
     : []
 }
 

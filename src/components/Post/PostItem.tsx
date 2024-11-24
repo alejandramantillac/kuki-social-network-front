@@ -16,7 +16,7 @@ const PostItem: React.FC<{
   post: Recipe
   onDelete: (postId: string) => void
 }> = ({ post, onDelete }) => {
-  const { hasRoles } = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleDelete = async () => {
@@ -29,6 +29,12 @@ const PostItem: React.FC<{
       console.error('Error deleting post:', error)
     }
   }
+
+  if (!authContext) {
+    return null
+  }
+
+  const { hasRoles } = authContext
 
   return (
     <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg relative">
