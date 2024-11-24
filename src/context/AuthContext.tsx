@@ -15,14 +15,13 @@ type AuthProviderProps = {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const isAuthenticated = !!authService.getUser()
+  const currentUser = authService.getUser()
+  const isAuthenticated = !!currentUser
 
   const hasRoles = (roles: string[]) => {
-    if (!authService.getUser()) return false
-    return roles.some((role) => authService.getUser()?.roles.includes(role))
+    if (!currentUser || !currentUser.roles) return false
+    return roles.some((role) => currentUser.roles.includes(role))
   }
-
-  const currentUser = authService.getUser()
 
   return (
     <AuthContext.Provider

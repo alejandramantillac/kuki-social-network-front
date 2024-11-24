@@ -42,18 +42,8 @@ const unlikeRecipe = async (recipeId: string): Promise<DeleteResponse> => {
   return response.data
 }
 
-const getLikesOf = async (
-  recipeId: string,
-  page: number = 0,
-  size: number = 10
-): Promise<Pageable<Like>> => {
-  const response = await axiosInstance.get<Pageable<Like>>(
-    `${API_PATH}/${recipeId}/like`,
-    {
-      params: { page, size },
-    }
-  )
-  return response.data
+const deletePost = async (postId: string): Promise<void> => {
+  await axiosInstance.delete(`${API_PATH}/${postId}`)
 }
 
 export default {
@@ -64,4 +54,5 @@ export default {
   getSavedPosts,
   savePost,
   unsavePost,
+  deletePost,
 }
