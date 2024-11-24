@@ -45,23 +45,26 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <div className="relative w-full rounded-md border border-border-primary shadow-sm focus-within:border-color-primary focus-within:ring-1 focus-within:ring-color-primary">
+      <div className="relative w-full rounded-md border border-border-primary shadow-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
         <input
           type="text"
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full rounded-md border-none px-3 py-2 pl-10 placeholder-text-secondary focus:outline-none"
+          className="w-full rounded-md border-none px-3 py-2 pl-10 placeholder-text-secondary focus:outline-none dark:bg-bg-primary dark:text-text-primary"
         />
-        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary">
+        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary dark:text-text-primary">
           <Search className="h-5 w-5" />
         </div>
       </div>
-      {error && <div className="text-red-500 mt-2">{error}</div>}
+      {error && <div className="text-text-error mt-2">{error}</div>}
       {searchResults.length > 0 && (
-        <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+        <div className="absolute z-10 mt-2 w-full bg-bg-primary border border-border-primary rounded-md shadow-lg dark:bg-bg-secondary dark:border-gray-700">
           {searchResults.map((recipe) => (
-            <div key={recipe.id} className="p-2 hover:bg-gray-100">
+            <div
+              key={recipe.id}
+              className="p-2 hover:bg-secondary dark:hover:bg-gray-700"
+            >
               {recipe.title}
             </div>
           ))}

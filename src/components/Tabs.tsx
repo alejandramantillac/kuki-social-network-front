@@ -1,29 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TabsProps } from '../types/props'
+import { AnimatePresence, motion } from 'framer-motion'
 
-/**
- * Tabs component to display a set of tabs with their respective content.
- * @param {TabsProps} props - The properties for the Tabs component.
- * @param {Array<{label: string, content: React.ReactNode}>} props.tabs - The array of tabs, each containing a label and content.
- * @returns {JSX.Element} The rendered Tabs component.
- */
-export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState(0)
-
+export const Tabs: React.FC<TabsProps> = ({ tabs, activeTab }) => {
   return (
     <div>
-      <div className="flex space-x-4 border-b">
+      <div className="flex flex-wrap justify-around border-b w-full overflow-x-auto">
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`py-2 px-4 ${activeTab === index ? 'border-b-2 border-primary text-primary' : 'text-text-secondary text-gray-500'}`}
-            onClick={() => setActiveTab(index)}
+            className={`py-2 px-3 text-sm sm:text-base sm:px-4 whitespace-nowrap ${
+              activeTab === index
+                ? 'border-b-2 border-primary text-primary'
+                : 'text-text-secondary'
+            } ${tab.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            onClick={tab.onClick}
+            disabled={tab.disabled}
           >
             {tab.label}
           </button>
         ))}
       </div>
-      <div className="mt-4">{tabs[activeTab].content}</div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          {tabs[activeTab].content}
+        </motion.div>
+      </AnimatePresence>
     </div>
   )
 }

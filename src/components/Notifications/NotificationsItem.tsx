@@ -17,11 +17,13 @@ const NotificationItem: React.FC<{ notification: Notification }> = ({
   return (
     <div
       className={`notification-item p-4 mb-4 rounded-lg shadow-md ${
-        notification.isRead ? 'bg-gray-100' : 'bg-white'
+        notification.isRead ? 'bg-bg-tertiary' : 'bg-bg-primary'
       }`}
     >
-      <p className="text-lg font-semibold">{notification.content}</p>
-      <span className="block text-sm text-gray-500 mt-2">
+      <p className="text-lg font-semibold dark:text-text-primary">
+        {notification.content}
+      </p>
+      <span className="block text-sm dark:text-text-secondary mt-2">
         {new Date(notification.creationDate).toLocaleString()}
       </span>
     </div>

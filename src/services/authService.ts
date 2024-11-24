@@ -1,5 +1,5 @@
 import axiosInstance from '../config/axiosConfig'
-import { User } from '../types/model'
+import { AuthUser } from '../types/model'
 import jwtService from './jwtService'
 
 const API_PATH = 'v1/auth'
@@ -14,7 +14,7 @@ const register = async (data: {
   password: string
   fullName: string
   country: string
-}): Promise<User | null> => {
+}): Promise<AuthUser | null> => {
   const response = await axiosInstance.post<LoginResponse>(
     API_PATH + '/register',
     data
@@ -28,7 +28,7 @@ const register = async (data: {
 const login = async (
   username: string,
   password: string
-): Promise<User | null> => {
+): Promise<AuthUser | null> => {
   const response = await axiosInstance.post<LoginResponse>(
     API_PATH + '/login',
     {
@@ -44,14 +44,19 @@ const login = async (
 
 const logout = (): void => {
   jwtService.removeToken()
+  window.location.reload()
 }
 
-const getUser = (): User | null => {
+const getUser = (): AuthUser | null => {
   const decodedToken = jwtService.getDecodedToken()
   if (!decodedToken) return null
   return {
+    id: decodedToken.id,
     username: jwtService.getUsername(decodedToken),
+    name: decodedToken.name,
     roles: jwtService.getRoles(decodedToken),
+    photoUrl: jwtService.getPhotoUrl(decodedToken),
+    avatarUrl: decodedToken.avatarUrl,
   }
 }
 

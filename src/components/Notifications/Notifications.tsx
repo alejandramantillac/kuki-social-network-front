@@ -35,7 +35,7 @@ const Notifications: React.FC = () => {
   }, [])
 
   return (
-    <div className="notifications p-4 bg-bg-secondary min-h-screen">
+    <div className="notifications p-4 bg-bg-secondary">
       {loading ? (
         <div className="flex justify-center items-center h-full">
           <div className="text-lg font-semibold">Loading...</div>

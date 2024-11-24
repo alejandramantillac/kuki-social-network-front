@@ -1,9 +1,13 @@
 import React from 'react'
+import { PostFilter } from './filter'
+import { Tag } from './model'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
 export type AvatarProps = {
-  src: string
+  src?: string
   alt: string
   size?: 'sm' | 'md' | 'lg'
+  url?: string
 }
 
 export type CardProps = {
@@ -38,6 +42,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string
   icon?: React.ReactNode
   errors?: string
+  register?: UseFormRegisterReturn<'title'>
 }
 
 export type ModalProps = {
@@ -109,6 +114,7 @@ export type AlertProps = {
 export type BadgeProps = {
   text: string
   color?: 'gray' | 'red' | 'green' | 'blue' | 'yellow' | 'primary' | 'secondary'
+  className?: string
 }
 
 export type TooltipProps = {
@@ -123,10 +129,13 @@ export type SpinnerProps = {
 export type TabProps = {
   label: string
   content: React.ReactNode
+  disabled?: boolean
+  onClick?: () => void
 }
 
 export type TabsProps = {
   tabs: TabProps[]
+  activeTab: number
 }
 
 export type FormProps = {
@@ -135,6 +144,7 @@ export type FormProps = {
   validate?: (values: Record<string, unknown>) => Record<string, string>
   children: React.ReactNode
   submitText?: string
+  submitButton?: boolean
 }
 
 export type LinkedTextProps = {
@@ -155,3 +165,26 @@ export type StepModalProps = {
   onClose: () => void
   id: string
 }
+export type ResponsiveProps = {
+  isMobile: boolean
+}
+
+export type MainLayoutProps = ResponsiveProps & {
+  children: React.ReactNode
+}
+
+export type PostListProps = {
+  filters?: PostFilter
+}
+
+export type TagListProps = {
+  tags: Tag[]
+}
+
+export type TextAreaProps =
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    label?: string
+    icon?: React.ReactNode
+    errors?: string
+    register?: UseFormRegisterReturn<'description'>
+  }

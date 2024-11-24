@@ -30,3 +30,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .slide-in-right {
+    @apply transform translate-x-full;
+    animation: slide-in-right 0.3s forwards;
+  }
+
+  @keyframes slide-in-right {
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .slide-out-right {
+    @apply transform translate-x-0;
+    animation: slide-out-right 0.3s forwards;
+  }
+
+  @keyframes slide-out-right {
+    to {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.dark {
+  --color-primary: #f97316; /* orange-500 */
+  --color-primary-hover: #ea580c; /* orange-600 */
+  --color-primary-dark: #d1d5db; /* gray-300 */
+  --color-primary-dark-hover: #9ca3af; /* gray-400 */
+  --color-secondary: #4b5563; /* gray-600 */
+  --color-secondary-hover: #374151; /* gray-700 */
+  --color-tertiary: #1f2937; /* gray-800 */
+  --color-tertiary-hover: #111827; /* gray-900 */
+  --color-text-primary: #f9fafb; /* gray-50 */
+  --color-text-primary-hover: #d1d5db; /* gray-300 */
+  --color-text-secondary: #d1d5db; /* gray-300 */
+  --color-text-secondary-hover: #f9fafb; /* gray-50 */
+  --color-text-tertiary: #9ca3af; /* gray-400 */
+  --color-text-tertiary-hover: #f4f5f7; /* gray-100 */
+  --color-border-primary: #f97316; /* orange-500 */
+  --color-bg-primary: #1f2937; /* gray-800 */
+  --color-bg-secondary: #111827; /* gray-900 */
+  --color-bg-tertiary: #374151; /* gray-700 */
+  --color-bg-success: #065f46; /* green-800 */
+  --color-text-success: #d1fae5; /* green-100 */
+  --color-bg-error: #b91c1c; /* red-800 */
+  --color-text-error: #fee2e2; /* red-100 */
+  --color-bg-warning: #92400e; /* yellow-800 */
+  --color-text-warning: #fef3c7; /* yellow-100 */
+  --color-bg-info: #1e3a8a; /* blue-800 */
+  --color-text-info: #bfdbfe; /* blue-100 */
+}
