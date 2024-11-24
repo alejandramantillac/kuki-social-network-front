@@ -16,7 +16,6 @@ import CreateRecipePage from '../pages/CreateRecipePage'
 import ProfilePage from '../pages/ProfilePage'
 import RequireAuth from '../components/RequireAuth'
 
-
 const routes = createRoutesFromElements(
   <Route path="/">
     <Route path="/login" element={<Login />} />

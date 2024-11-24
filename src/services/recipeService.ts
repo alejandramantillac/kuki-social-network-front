@@ -41,7 +41,18 @@ const createRecipe = async (data: CreateRecipeRequest): Promise<Recipe> => {
   return response.data
 }
 
+/**
+ * Gets a recipe by its ID.
+ * @param {string} id - The ID of the recipe to get.
+ * @returns {Promise<Recipe>} A promise that resolves to the recipe.
+ */
+const getRecipe = async (id: string): Promise<Recipe> => {
+  const response = await axiosInstance.get<Recipe>(`${API_PATH}/${id}`)
+  return response.data
+}
+
 export default {
   searchRecipes,
   createRecipe,
+  getRecipe,
 }

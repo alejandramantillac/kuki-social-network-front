@@ -36,7 +36,10 @@ const PostItem: React.FC<{
   }
 
   return (
-    <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg relative">
+    <article
+      className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg relative cursor-pointer"
+      onClick={() => console.log('clickable')}
+    >
       <PostImage
         src={post.photoUrl}
         userSaved={post.savedByUser}
