@@ -15,19 +15,6 @@ const getPosts = async (
   return response.data.content
 }
 
-const getSavedPosts = async (): Promise<Pageable<Recipe>> => {
-  const response = await axiosInstance.get<Pageable<Recipe>>(`${API_PATH}/save`)
-  return response.data
-}
-
-const savePost = async (recipeId: string): Promise<void> => {
-  await axiosInstance.post<void>(`${API_PATH}/save/${recipeId}`)
-}
-
-const unsavePost = async (recipeId: string): Promise<void> => {
-  await axiosInstance.delete<void>(`${API_PATH}/save/${recipeId}`)
-}
-
 const likeRecipe = async (recipeId: string): Promise<Like> => {
   const response = await axiosInstance.post<Like>(
     `${API_PATH}/${recipeId}/like`
@@ -50,9 +37,5 @@ export default {
   getPosts,
   likeRecipe,
   unlikeRecipe,
-  getLikesOf,
-  getSavedPosts,
-  savePost,
-  unsavePost,
   deletePost,
 }
