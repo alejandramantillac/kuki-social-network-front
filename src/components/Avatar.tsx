@@ -23,10 +23,12 @@ export const Avatar: React.FC<AvatarProps> = ({
     xl: 'w-48 h-48',
   }
 
+  const imageSource = src ? src : 'https://i.imgur.com/NJ1ZVAh'
+
   const avatarImage = (
     <div className={`${sizeClasses[size]}`}>
       <img
-        src={src}
+        src={imageSource}
         alt={alt}
         className={`rounded-full ${sizeClasses[size]} object-cover object-center`}
       />

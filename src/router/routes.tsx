@@ -13,9 +13,9 @@ import Root from '../components/Root'
 import NotFoundPage from '../pages/NotFoundPage'
 import SettingsPage from '../pages/SettingsPage'
 import CreateRecipePage from '../pages/CreateRecipePage'
+import SavedPage from '../pages/SavedPage'
 import ProfilePage from '../pages/ProfilePage'
 import RequireAuth from '../components/RequireAuth'
-
 
 const routes = createRoutesFromElements(
   <Route path="/">
@@ -31,6 +31,7 @@ const routes = createRoutesFromElements(
       <Route path="/" element={<ContentWithSidebar />}>
         <Route element={<RequireAuth />}>
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/saved" element={<SavedPage />} />
         </Route>
         <Route path="/" element={<Feed />} />
       </Route>
