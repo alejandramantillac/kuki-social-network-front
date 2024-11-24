@@ -11,6 +11,7 @@ import { AuthContext } from '../../context/AuthContext'
 import postService from '../../services/postService'
 import { Button } from '../Button'
 import { Modal } from '../Modal/Modal'
+import RequireAdmin from '../RequireAdmin'
 
 const PostItem: React.FC<{
   post: Recipe
@@ -34,8 +35,6 @@ const PostItem: React.FC<{
     return null
   }
 
-  const { hasRoles } = authContext
-
   return (
     <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg relative">
       <PostImage
@@ -57,7 +56,7 @@ const PostItem: React.FC<{
           <Globe className="w-4 h-4 mr-1" />
           <span>{post.country.name}</span>
         </div>
-        {hasRoles(['ROLE_ADMIN']) && (
+        <RequireAdmin>
           <Button
             variant="none"
             size="sm"
@@ -66,7 +65,7 @@ const PostItem: React.FC<{
           >
             <Trash className="w-4 h-4" />
           </Button>
-        )}
+        </RequireAdmin>
         <PostFooter
           likes={post.likes}
           comments={post.comments}
