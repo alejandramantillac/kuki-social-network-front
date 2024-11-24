@@ -5,8 +5,6 @@ import RecipeBody from '../components/Recipe/RecipeBody'
 import recipeService from '../services/recipeService'
 import { Recipe } from '../types/model'
 import { Spinner } from '../components/Spinner'
-import { StepModal } from '../components/StepModal/StepModal'
-import { Button } from '../components/Button'
 
 /**
  * ViewRecipePage component to display the recipe page.
@@ -21,7 +19,6 @@ const ViewRecipePage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [loading, setLoading] = useState(true)
-  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     try {
@@ -51,18 +48,7 @@ const ViewRecipePage: React.FC = () => {
         <>
           <div className="flex flex-col">
             <RecipeBody recipe={recipe} />
-            <Button className="max-w-48 h-11" onClick={() => setIsOpen(true)}>
-              View Steps
-            </Button>
           </div>
-
-          {id && (
-            <StepModal
-              isOpen={isOpen}
-              onClose={() => setIsOpen(false)}
-              id={id}
-            />
-          )}
         </>
       )}
     </div>
