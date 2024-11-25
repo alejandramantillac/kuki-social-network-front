@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwtService from '../services/jwtService'
 
-const API_URL = 'http://localhost:8080/api/'
+const API_URL = 'http://xhgrid2:8080/cookbook-back/api/'
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

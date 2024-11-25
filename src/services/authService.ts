@@ -51,12 +51,9 @@ const getUser = (): AuthUser | null => {
   const decodedToken = jwtService.getDecodedToken()
   if (!decodedToken) return null
   return {
-    id: decodedToken.id,
     username: jwtService.getUsername(decodedToken),
-    name: decodedToken.name,
     roles: jwtService.getRoles(decodedToken),
     photoUrl: jwtService.getPhotoUrl(decodedToken),
-    avatarUrl: decodedToken.avatarUrl,
   }
 }
 

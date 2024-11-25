@@ -1,33 +1,25 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import PostItem from './PostItem'
-import postService from '../../services/postService'
-import { Recipe } from '../../types/model'
+import { RootState, AppDispatch } from '../../store/store'
+import {
+  fetchPosts,
+  incrementPage,
+  removePost,
+} from '../../store/slices/postSlice'
 import { Spinner } from '../Spinner'
 import NoMoreContent from '../NoMoreContent'
 import { PostListProps } from '../../types/props'
 
 const PostList: React.FC<PostListProps> = ({ filters = undefined }) => {
-  const [posts, setPosts] = useState<Recipe[]>([])
-  const [page, setPage] = useState(0)
-  const [loading, setLoading] = useState(false)
-  const [hasMore, setHasMore] = useState(true)
+  const dispatch = useDispatch<AppDispatch>()
+  const { posts, loading, hasMore, page } = useSelector(
+    (state: RootState) => state.post
+  )
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true)
-      const data = await postService.getPosts(filters, page, 10)
-      setPosts((prevPosts) => {
-        const allPosts = [...prevPosts, ...data]
-        const uniquePosts = Array.from(
-          new Set(allPosts.map((post) => post.id))
-        ).map((id) => allPosts.find((post) => post.id === id))
-        return uniquePosts as Recipe[]
-      })
-      setHasMore(data.length > 0)
-      setLoading(false)
-    }
-    fetchPosts()
-  }, [page, filters])
+    dispatch(fetchPosts({ filters, page }))
+  }, [dispatch, filters, page])
 
   const handleScroll = useCallback(() => {
     if (
@@ -37,8 +29,8 @@ const PostList: React.FC<PostListProps> = ({ filters = undefined }) => {
     ) {
       return
     }
-    setPage((prevPage) => prevPage + 1)
-  }, [loading])
+    dispatch(incrementPage())
+  }, [dispatch, loading])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -48,7 +40,7 @@ const PostList: React.FC<PostListProps> = ({ filters = undefined }) => {
   }, [handleScroll])
 
   const handleDeletePost = (postId: string) => {
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId))
+    dispatch(removePost(postId))
   }
 
   return (

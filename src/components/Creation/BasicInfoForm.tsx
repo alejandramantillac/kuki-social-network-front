@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { CreateRecipeRequest, Country } from '../../types/model'
+import { CreateRecipeRequest } from '../../types/model'
 import { Button } from '../Button'
 import { Dropdown } from '../Dropdown'
 import { Input } from '../Input'
 import { TextArea } from '../TextArea'
 import ImageUploader from './ImageUploader'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCountries } from '../../store/slices/countrySlice'
+import { RootState, AppDispatch } from '../../store/store'
 
 interface BasicInfoFormProps {
   onSubmit: (data: Partial<CreateRecipeRequest>) => void
-  countries: Country[]
   initialData: Partial<CreateRecipeRequest>
+  setError: (message: string) => void
 }
 
 const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   onSubmit,
-  countries,
   initialData,
 }) => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { countries } = useSelector((state: RootState) => state.country)
   const DIFFICULTIES = ['BASIC', 'INTERMEDIATE', 'ADVANCED']
   const {
     register,
@@ -33,6 +37,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     console.log('Form data:', data)
     onSubmit(data)
   }
+
+  useEffect(() => {
+    dispatch(fetchCountries())
+  }, [dispatch])
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">

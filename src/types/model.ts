@@ -87,12 +87,9 @@ export type Tag = {
 }
 
 export type AuthUser = {
-  id: string
   username: string
-  name: string
   roles: string[]
   photoUrl?: string
-  avatarUrl: string
 }
 
 export type User = {
