@@ -4,16 +4,18 @@ import storage from 'redux-persist/lib/storage'
 import { combineReducers } from 'redux'
 import authReducer from './slices/authSlice'
 import postReducer from './slices/postSlice'
+import countryReducer from './slices/countrySlice'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   post: postReducer,
+  country: countryReducer,
 })
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'], // Only persist auth slice
+  whitelist: ['auth'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

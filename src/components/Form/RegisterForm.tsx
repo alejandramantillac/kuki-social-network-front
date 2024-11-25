@@ -1,9 +1,12 @@
-import React, { useState, useEffect, JSX } from 'react'
+import React, { useEffect, JSX } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Form from './Form'
 import { Input } from '../Input'
 import auth from '../../services/authService'
-import country from '../../services/countryService'
 import { Dropdown } from '../Dropdown'
+import { fetchCountries } from '../../store/slices/countrySlice'
+import { RootState, AppDispatch } from '../../store/store'
+import { useState } from 'react'
 
 /**
  * RegisterForm component to display a registration form.
@@ -21,21 +24,14 @@ const RegisterForm: React.FC = (): JSX.Element => {
   }
 
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const [countries, setCountries] = useState<{ code: string; name: string }[]>(
-    []
+  const dispatch = useDispatch<AppDispatch>()
+  const { countries, loading, error } = useSelector(
+    (state: RootState) => state.country
   )
 
   useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const countriesData = await country.getCountries()
-        setCountries(countriesData)
-      } catch (error) {
-        console.error('Error fetching countries:', error)
-      }
-    }
-    fetchCountries()
-  }, [])
+    dispatch(fetchCountries())
+  }, [dispatch])
 
   const validate = (values: Record<string, unknown>) => {
     console.log(values)
@@ -96,6 +92,8 @@ const RegisterForm: React.FC = (): JSX.Element => {
         onChange={(e) => setErrors({ ...errors, country: e.target.value })}
         errors={errors.country}
       />
+      {loading && <p>Loading countries...</p>}
+      {error && <p className="text-red-500">{error}</p>}
     </Form>
   )
 }
