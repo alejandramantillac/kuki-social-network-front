@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Tooltip } from '../Tooltip'
 import {
   HomeIcon,
-  SearchIcon,
+  Bookmark,
   BellIcon,
   CalendarIcon,
   EditIcon,
@@ -46,20 +46,12 @@ export const Navbar: React.FC<ResponsiveProps> = ({
       <div className="mt-4">
         {authContext?.isAuthenticated ? (
           <Tooltip text="Account">
-            <Button
-              variant="none"
-              size="sm"
-              className="p-0"
-              onClick={() =>
-                navigate(`/user/${authContext.currentUser?.username}`)
-              }
-            >
-              <Avatar
-                src={authContext?.currentUser?.photoUrl}
-                alt="Avatar"
-                size="md"
-              />
-            </Button>
+            <Avatar
+              src={authContext?.currentUser?.photoUrl}
+              alt="Avatar"
+              size="md"
+              user={authContext?.currentUser?.username}
+            />
           </Tooltip>
         ) : (
           <Button
@@ -87,14 +79,14 @@ export const Navbar: React.FC<ResponsiveProps> = ({
           </Button>
         </Tooltip>
 
-        <Tooltip text="Explore">
+        <Tooltip text="Saved">
           <Button
             variant="none"
             size="sm"
             className="text-border-primary p-0"
-            onClick={() => navigate('/explore')}
+            onClick={() => navigate('/saved')}
           >
-            <SearchIcon className="h-6 w-6" />
+            <Bookmark className="h-6 w-6" />
           </Button>
         </Tooltip>
 

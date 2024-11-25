@@ -66,7 +66,7 @@ const CreateRecipePage: React.FC = () => {
       <Card
         title="Create Your Recipe"
         description={`Step ${currentStep + 1} of ${tabs.length}`}
-        imageUrl="/create_recipe.jpg"
+        imageUrl="https://i.ibb.co/QNJ0Qt1/create-recipe.jpg"
       >
         <div className="space-y-6">
           <Tabs

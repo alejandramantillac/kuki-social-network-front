@@ -38,6 +38,7 @@ const PostItem: React.FC<{
   return (
     <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow ">
       <PostImage
+        postId={post.id}
         src={post.photoUrl}
         userSaved={post.savedByUser}
         difficulty={post.difficulty}

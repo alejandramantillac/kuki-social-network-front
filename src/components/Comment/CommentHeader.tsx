@@ -15,7 +15,7 @@ const CommentHeader: React.FC<CommentHeaderProps> = ({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center">
-        <Avatar src={photoUrl} alt={username} size="sm" />
+        <Avatar src={photoUrl} alt={username} size="sm" user={username} />
         <span className="font-medium text-text-tertiary ml-2">{username}</span>
       </div>
       <span className="text-xs text-text-secondary">

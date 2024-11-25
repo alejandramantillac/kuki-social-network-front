@@ -76,7 +76,12 @@ const FollowList: React.FC = () => {
             className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary-hover transition-colors duration-200"
           >
             <div className="flex items-center gap-3">
-              <Avatar src={user.photoUrl} alt={user.name} size="sm" />
+              <Avatar
+                src={user.photoUrl}
+                alt={user.name}
+                size="sm"
+                user={user.username}
+              />
               <div>
                 <span className="font-medium text-text-tertiary block text-sm sm:text-base">
                   {user.name}

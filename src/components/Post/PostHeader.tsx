@@ -20,7 +20,7 @@ const PostHeader: React.FC<{
       </h2>
       <div className="flex items-center">
         <span className="text-sm text-text-secondary mr-2">by {author}</span>
-        <Avatar src={authorAvatar} alt={author} size="sm" />
+        <Avatar src={authorAvatar} alt={author} size="sm" user={author} />
       </div>
     </div>
   )

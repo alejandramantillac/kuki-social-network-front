@@ -59,12 +59,8 @@ const ProfilePage: React.FC = () => {
       try {
         const currentUser = await userService.getCurrentUser()
 
-        if (authContext?.isAuthenticated && username === 'me') {
-          setUser(currentUser)
-        } else {
-          const user = await userService.getUserByUserName(username)
-          setUser(user)
-        }
+        const user = await userService.getUserByUserName(username)
+        setUser(user)
 
         const isFollowing = await followService.isFollowing(
           currentUser.username,
@@ -78,7 +74,7 @@ const ProfilePage: React.FC = () => {
       }
     }
     fetchUser()
-  }, [])
+  }, [username])
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-bg-secondary min-h-screen">
@@ -101,7 +97,7 @@ const ProfilePage: React.FC = () => {
         <ProfileBiography biography={user?.biography || ''} />
       </div>
       <div className="col-span-2 flex-1 md:flex-1 px-4">
-        <PostList filters={{ sortBy: 'publishDate' }} />
+        <PostList filters={{ sortBy: 'publishDate', owner: username }} />
       </div>
     </div>
   )
