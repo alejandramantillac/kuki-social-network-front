@@ -2,6 +2,7 @@ import React, { JSX } from 'react'
 import Form from './Form'
 import { Input } from '../Input'
 import auth from '../../services/authService'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * LoginForm component to display a login form.
@@ -10,6 +11,7 @@ import auth from '../../services/authService'
  * <LoginForm />
  */
 const LoginForm: React.FC = (): JSX.Element => {
+  const navigate = useNavigate()
   const initialValues = {
     username: null,
     password: null,
@@ -33,7 +35,8 @@ const LoginForm: React.FC = (): JSX.Element => {
         data.password as string
       )
       if (user) {
-        window.location.href = '/'
+        navigate('/')
+        window.location.reload()
       } else {
         console.log('Invalid username or password')
       }

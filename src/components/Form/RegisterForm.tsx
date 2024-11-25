@@ -7,6 +7,7 @@ import { Dropdown } from '../Dropdown'
 import { fetchCountries } from '../../store/slices/countrySlice'
 import { RootState, AppDispatch } from '../../store/store'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * RegisterForm component to display a registration form.
@@ -15,6 +16,7 @@ import { useState } from 'react'
  * <RegisterForm />
  */
 const RegisterForm: React.FC = (): JSX.Element => {
+  const navigate = useNavigate()
   const initialValues = {
     username: '',
     email: '',
@@ -61,8 +63,10 @@ const RegisterForm: React.FC = (): JSX.Element => {
           country: string
         }
       )
-      if (user) window.location.href = '/'
-      else console.log('Registration failed')
+      if (user) {
+        navigate('/')
+        window.location.reload()
+      } else console.log('Registration failed')
     } catch (error) {
       console.error('An error occurred while submitting the form:', error)
     }

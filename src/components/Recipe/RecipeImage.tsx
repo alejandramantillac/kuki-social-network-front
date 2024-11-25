@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const RecipeImage: React.FC<{ src: string }> = ({ src }) => {
   const [imgSrc, setImgSrc] = useState(src)
-  const defaultImage = '/recipe.jpeg'
+  const defaultImage = 'https://i.ibb.co/Kqvy0x2/recipe.jpg'
 
   return (
     <div className="relative">

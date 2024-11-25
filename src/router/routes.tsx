@@ -37,7 +37,7 @@ const routes = createRoutesFromElements(
         <Route path="/" element={<Feed />} />
         <Route path="/view-recipe/:id" element={<ViewRecipePage />} />
       </Route>
-      <Route path="/profile" element={<Navigate to="/profile/me" replace />} />
+      <Route path="/profile" element={<Navigate to="/" replace />} />
       <Route path="/profile/:username" element={<ProfilePage />} />
     </Route>
     <Route path="*" element={<NotFoundPage />} />

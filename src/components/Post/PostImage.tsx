@@ -12,7 +12,7 @@ const PostImage: React.FC<{
 }> = ({ postId, src, userSaved, difficulty }) => {
   const [imgSrc, setImgSrc] = useState(src)
   const [saved, setUserSaved] = useState(userSaved)
-  const defaultImage = '/recipe.jpeg'
+  const defaultImage = 'https://i.ibb.co/Kqvy0x2/recipe.jpg'
 
   const handleSaveToggle = async () => {
     if (saved) {
