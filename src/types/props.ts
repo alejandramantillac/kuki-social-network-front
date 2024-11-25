@@ -165,6 +165,11 @@ export type SearchBarProps = {
   className?: string
 }
 
+export type StepModalProps = {
+  isOpen: boolean
+  onClose: () => void
+  id: string
+}
 export type ResponsiveProps = {
   isMobile: boolean
 }

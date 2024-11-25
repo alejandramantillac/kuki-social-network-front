@@ -36,7 +36,7 @@ const PostItem: React.FC<{
   }
 
   return (
-    <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow hover:shadow-lg relative">
+    <article className="bg-bg-primary shadow-md rounded-lg overflow-hidden mb-6 transition-shadow ">
       <PostImage
         src={post.photoUrl}
         userSaved={post.savedByUser}
@@ -47,6 +47,7 @@ const PostItem: React.FC<{
           title={post.title}
           author={post.recipeOwner.username}
           authorAvatar={post.recipeOwner.photoUrl}
+          id={post.id}
         />
         <PostDescription description={post.description} />
         <PostTags tags={post.tags} />
