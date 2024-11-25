@@ -16,6 +16,7 @@ import CreateRecipePage from '../pages/CreateRecipePage'
 import ProfilePage from '../pages/ProfilePage'
 import RequireAuth from '../components/RequireAuth'
 import ViewRecipePage from '../pages/ViewRecipePage'
+import SavedPage from '../pages/SavedPage'
 
 const routes = createRoutesFromElements(
   <Route path="/">
@@ -31,6 +32,7 @@ const routes = createRoutesFromElements(
       <Route path="/" element={<ContentWithSidebar />}>
         <Route element={<RequireAuth />}>
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/saved" element={<SavedPage />} />
         </Route>
         <Route path="/" element={<Feed />} />
         <Route path="/view-recipe/:id" element={<ViewRecipePage />} />
