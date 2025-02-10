@@ -1,10 +1,9 @@
 import axios from 'axios'
 import jwtService from '../services/jwtService'
-
-const API_URL = 'http://xhgrid2:8080/cookbook-back/api/'
+import config from './envConfig'
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: config.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
